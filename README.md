@@ -7,4 +7,4 @@
 ![実行イメージ](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/image1.png)
 
 ## ダウンロード
-- ![Gochiusearch 1.1.5892.635](https://github.com/ksasao/Gochiusearch/blob/master/Release/Gochiusearch-1.1.5892.635.zip?raw=true) (2016/2/18)
+- [Gochiusearch 1.1.5892.635](https://github.com/ksasao/Gochiusearch/blob/master/Release/Gochiusearch-1.1.5892.635.zip?raw=true) (2016/2/18)
