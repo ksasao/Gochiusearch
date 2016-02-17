@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSearchEngine", "ImageSearchEngine\ImageSearchEngine.csproj", "{A8923558-5B36-4858-B624-7CC9B844ACBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateIndex", "CreateIndex\CreateIndex.csproj", "{C8DBBF3D-3267-411D-BE2B-430A7E1EEDEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gochiusearch", "Gochiusearch\Gochiusearch.csproj", "{CAADB055-271D-4A84-8309-9EAA9DBA9ACF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Script", "Script", "{B2B5EBC5-AD71-4C02-BEC3-C92C3A0F2F74}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Users\ksasa_000\Desktop\avi2jpg.bat = ..\..\..\Users\ksasa_000\Desktop\avi2jpg.bat
+		..\..\..\Users\ksasa_000\Desktop\repeat.bat = ..\..\..\Users\ksasa_000\Desktop\repeat.bat
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateDb", "CreateDb\CreateDb.csproj", "{307CF55D-D95A-4A20-BF1F-D05427B62E7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8923558-5B36-4858-B624-7CC9B844ACBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8923558-5B36-4858-B624-7CC9B844ACBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8923558-5B36-4858-B624-7CC9B844ACBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8923558-5B36-4858-B624-7CC9B844ACBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8DBBF3D-3267-411D-BE2B-430A7E1EEDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8DBBF3D-3267-411D-BE2B-430A7E1EEDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8DBBF3D-3267-411D-BE2B-430A7E1EEDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8DBBF3D-3267-411D-BE2B-430A7E1EEDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAADB055-271D-4A84-8309-9EAA9DBA9ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAADB055-271D-4A84-8309-9EAA9DBA9ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAADB055-271D-4A84-8309-9EAA9DBA9ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAADB055-271D-4A84-8309-9EAA9DBA9ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{307CF55D-D95A-4A20-BF1F-D05427B62E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{307CF55D-D95A-4A20-BF1F-D05427B62E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{307CF55D-D95A-4A20-BF1F-D05427B62E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{307CF55D-D95A-4A20-BF1F-D05427B62E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
