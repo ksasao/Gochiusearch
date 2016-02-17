@@ -1,3 +1,4 @@
+call avi2jpg.bat 0_01.mp4
 call avi2jpg.bat 0_02.mp4
 call avi2jpg.bat 0_03.mp4
 call avi2jpg.bat 0_04.mp4
