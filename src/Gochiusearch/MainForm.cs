@@ -47,7 +47,8 @@ namespace Mpga.Gochiusearch
             var name = asm.GetName();
             this.Text = name.Name + " v" + name.Version;
 
-            // 検索レベルの初期化
+            // 検索レベル(探索するハミング距離の範囲)の初期化
+            // 0はハッシュ値が完全一致(ハミング距離0)の場合
             List<int> item = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             foreach (var i in item)
             {
@@ -166,26 +167,29 @@ namespace Mpga.Gochiusearch
 
         private void FindImage(string file)
         {
-            _lastFile = file;
-            // ドラッグされた画像を表示
-            try
+            if (_lastFile != file)
             {
-                using (Bitmap queryImage = new Bitmap(file))
+                // ドラッグされた画像を表示
+                try
                 {
-                    if (_bmpCache != null)
+                    using (Bitmap queryImage = new Bitmap(file))
                     {
-                        _bmpCache.Dispose();
+                        if (_bmpCache != null)
+                        {
+                            _bmpCache.Dispose();
+                        }
+                        // queryImageのファイルをロックしないように
+                        // メモリ上に複製＆32bitフォーマット化
+                        _bmpCache = new Bitmap(queryImage);
+                        this.pictureBox1.Image = _bmpCache;
+                        _lastFile = file;
                     }
-                    // queryImageのファイルをロックしないように
-                    // メモリ上に複製＆32bitフォーマット化
-                    _bmpCache = new Bitmap(queryImage);
-                    this.pictureBox1.Image = _bmpCache;
                 }
-            }
-            catch
-            {
-                _lastFile = "";
-                this.pictureBox1.Image = new Bitmap(1, 1);
+                catch
+                {
+                    _lastFile = "";
+                    this.pictureBox1.Image = new Bitmap(1, 1);
+                }
             }
 
             Stopwatch watch = new Stopwatch();
