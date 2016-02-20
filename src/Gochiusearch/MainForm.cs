@@ -19,7 +19,7 @@ namespace Mpga.Gochiusearch
     public partial class MainForm : Form
     {
         private Process _p = new System.Diagnostics.Process();
-        private string _lastFile = "";
+        private string _lastTarget = "";
 
         ImageSearchEngine.ImageSearch _iv = null;
         Bitmap _bmpCache = null;
@@ -167,7 +167,7 @@ namespace Mpga.Gochiusearch
 
         private void FindImage(string file)
         {
-            if (_lastFile != file)
+            if (_lastTarget != _currentTarget)
             {
                 // ドラッグされた画像を表示
                 try
@@ -182,12 +182,12 @@ namespace Mpga.Gochiusearch
                         // メモリ上に複製＆32bitフォーマット化
                         _bmpCache = new Bitmap(queryImage);
                         this.pictureBox1.Image = _bmpCache;
-                        _lastFile = file;
+                        _lastTarget = _currentTarget;
                     }
                 }
                 catch
                 {
-                    _lastFile = "";
+                    _lastTarget = "";
                     this.pictureBox1.Image = new Bitmap(1, 1);
                 }
             }
@@ -253,9 +253,9 @@ namespace Mpga.Gochiusearch
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_lastFile != "")
+            if (_lastTarget != "")
             {
-                FindImage(_lastFile);
+                FindImage(_lastTarget);
             }
         }
     }
