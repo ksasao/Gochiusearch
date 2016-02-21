@@ -19,12 +19,13 @@ namespace Mpga.Gochiusearch
     public partial class MainForm : Form
     {
         private Process _p = new System.Diagnostics.Process();
-        private string _lastTarget = "";
+        private string _currentFile = "";
+        private string _currentUri = "";
+        private string _lastUri = "";
 
         ImageSearchEngine.ImageSearch _iv = null;
         Bitmap _bmpCache = null;
         List<StoryInfo> _story = new List<StoryInfo>();
-        string _currentTarget = "";
 
         public MainForm()
         {
@@ -139,7 +140,7 @@ namespace Mpga.Gochiusearch
                 }
                 url = url.ToLower();
                 if(url.EndsWith("jpg") || url.EndsWith("jpeg")
-                    || url.EndsWith("gif") || url.EndsWith("png"))
+                    || url.EndsWith("gif") || url.EndsWith("png") || url.EndsWith("bmp"))
                 {
                     _isUrl = true;
                     e.Effect = DragDropEffects.Copy;
@@ -149,17 +150,16 @@ namespace Mpga.Gochiusearch
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
-            string file = "";
             if (_isUrl)
             {
                 string url = e.Data.GetData("Text") as string;
                 using (System.Net.WebClient wc = new System.Net.WebClient())
                 {
-                    file = "Browser";
+                    _currentUri = url;
+                    _currentFile = "Browser";
                     try
                     {
-                        wc.DownloadFile(url, file);
-                        _currentTarget = url;
+                        wc.DownloadFile(url, _currentFile);
                     }
                     catch
                     {
@@ -170,18 +170,19 @@ namespace Mpga.Gochiusearch
             else
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                file = files[0];
-                _currentTarget = file;
+                _currentFile = files[0];
+                _currentUri = _currentFile;
             }
-            FindImage(file);
+            FindImage(_currentFile);
 
         }
 
         private void FindImage(string file)
         {
-            if (_lastTarget != _currentTarget)
+            if (_lastUri != _currentUri)
             {
                 // ドラッグされた画像を表示
+                GC.Collect();
                 try
                 {
                     using (Bitmap queryImage = new Bitmap(file))
@@ -194,12 +195,12 @@ namespace Mpga.Gochiusearch
                         // メモリ上に複製＆32bitフォーマット化
                         _bmpCache = new Bitmap(queryImage);
                         this.pictureBox1.Image = _bmpCache;
-                        _lastTarget = _currentTarget;
+                        _lastUri = _currentFile;
                     }
                 }
                 catch
                 {
-                    _lastTarget = "";
+                    _lastUri = "";
                     this.pictureBox1.Image = new Bitmap(1, 1);
                 }
             }
@@ -209,7 +210,7 @@ namespace Mpga.Gochiusearch
             watch.Start();
             ulong vec = _iv.GetVector(file);
             this.richTextBox1.Text = ""
-            + "検索画像: " + _currentTarget + "\r\n";
+            + "検索画像: " + _currentUri + "\r\n";
 
             List<string> data = new List<string>();
             ImageInfo[][] log = _iv.GetSimilarImage(vec, (int)this.comboBox1.SelectedItem);
@@ -221,7 +222,7 @@ namespace Mpga.Gochiusearch
                 this.richTextBox1.Text += "見つかりませんでした。\r\n";
                 return;
             }
-
+        
             for(int i = 0; i < log.Length; i++)
             {
                 var scene = log[i];
@@ -265,9 +266,9 @@ namespace Mpga.Gochiusearch
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_lastTarget != "")
+            if (_lastUri != "")
             {
-                FindImage(_lastTarget);
+                FindImage(_currentFile);
             }
         }
     }
