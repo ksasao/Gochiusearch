@@ -109,7 +109,10 @@ namespace Mpga.ImageSearchEngine
             {
                 using (Graphics g = Graphics.FromImage(bmp32))
                 {
-                    g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+                    g.DrawImage(bmp,
+                        new Rectangle(0, 0, bmp32.Width, bmp32.Height),
+                        new Rectangle(0, 0, bmp.Width, bmp.Height),
+                        GraphicsUnit.Pixel);
                 }
                 bmp32Data = BitmapToByteArray(bmp32);
             }
