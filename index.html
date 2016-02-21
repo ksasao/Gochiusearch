@@ -46,8 +46,14 @@
 
 <p>1期、2期の動画に含まれる約100万枚のすべての画像が検索対象です。1枚の画像をわずか8バイト程度まで圧縮することで、
 データベース込みで3MB程度とコンパクトになっています。また、画像の検索時間も数十ミリ秒程度と高速です。
-画像は、9x8ピクセルに縮小したものをグレースケー化し、横方向に隣接するピクセル間の輝度差をビットベクトルとしています。
+画像は、9x8ピクセルに縮小したものをグレースケール化し、横方向に隣接するピクセル間の輝度差をビットベクトルとしています。
 コア部分のみ抜き出したコードは <a href="https://gist.github.com/ksasao/e625d590801dce98c5e0">https://gist.github.com/ksasao/e625d590801dce98c5e0</a> を参照してください。</p>
+
+<h2>
+<a id="mac対応" class="anchor" href="#mac%E5%AF%BE%E5%BF%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mac対応</h2>
+
+<p>Xamarin Studio を利用して Mac上でビルド・実行することが可能です。
+Xamarin Studio は <a href="http://www.monodevelop.com/download/">http://www.monodevelop.com/download/</a> からダウンロードしてください。Mono + GTK# もインストールが必要です。</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/ksasao/Gochiusearch">Gochiusearch</a> is maintained by <a href="https://github.com/ksasao">ksasao</a>.</span>
