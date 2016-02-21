@@ -22,3 +22,8 @@ Windows 専用アプリです。Linux版、Mac版もリリースを予定して�
 ## Mac対応
 Xamarin Studio を利用して Mac上でビルド・実行することが可能です。
 Xamarin Studio は http://www.monodevelop.com/download/ からダウンロードしてください。Mono + GTK# もインストールが必要です。
+
+## Linux対応
+MonoDevelop を利用して Linux上でビルド・実行することが可能です。
+Ubuntu の場合は、Ubuntu Software Center から MonoDevelop をインストールしてビルドしてください。
+その他のプラットフォームでは、http://www.monodevelop.com/download/ を参照してください。
