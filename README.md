@@ -9,7 +9,7 @@
 ![実行イメージ](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/image1.png)
 
 ## ダウンロード
-配布中のアプリは Windows 向けですが、Mac版、Linux版でも下記の手順で動作させることができます。
+配布中のアプリは Windows 向けですが、Mac、Linuxでも以下の手順で動作させることができます。
 
 - [Gochiusearch 1.1.5892.635](https://github.com/ksasao/Gochiusearch/blob/master/Release/Gochiusearch-1.1.5892.635.zip?raw=true) (2016/2/18)
 
@@ -22,12 +22,15 @@
 ## Mac対応
 Xamarin Studio を利用して Mac上でビルド・実行することが可能です。
 Xamarin Studio は http://www.monodevelop.com/download/ からダウンロードしてください。Mono + GTK# もインストールが必要です。
+左上の「Download ZIP」からソースコードをダウンロードし、Xamarin Studio で、src/Gochiusearch.sln を開いて実行してください。
 
 ![Macでの動作](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/mac.png)
 
 ## Linux対応
 MonoDevelop を利用して Linux上でビルド・実行することが可能です。
-Ubuntu の場合は、Ubuntu Software Center から MonoDevelop をインストールしてビルドしてください。
+Ubuntu の場合は、Ubuntu Software Center から MonoDevelop をインストールしたのち、
+左上の「Download ZIP」からソースコードをダウンロードし、MonoDevelop で、src/Gochiusearch.sln を開いて実行してください。
+
 その他のプラットフォームでは、http://www.monodevelop.com/download/ を参照してください。
 
 ![Ubuntuでの動作](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/ubuntu.png)
