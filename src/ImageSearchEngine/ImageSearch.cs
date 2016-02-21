@@ -16,6 +16,8 @@ namespace Mpga.ImageSearchEngine
         string _basePath;
         ImageInfo[] _info;
 
+        public object StopWatch { get; private set; }
+
         public ImageSearch(string basePath)
         {
             _basePath = basePath;
@@ -72,18 +74,9 @@ namespace Mpga.ImageSearchEngine
             // http://www.hackerfactor.com/blog/?/archives/529-Kind-of-Like-That.html
 
             // 入力した画像を 9x8 の領域にスケールする
-            Bitmap bmpVector = new Bitmap(9, 8);
-            using (Graphics g = Graphics.FromImage(bmpVector))
-            {
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                Bitmap bmp = new Bitmap(filename);
-                g.DrawImage(bmp, 
-                    new Rectangle(0, 0, bmpVector.Width, bmpVector.Height),
-                    new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
-                bmp.Dispose();
-            }
-            byte[] data = BitmapToByteArray(bmpVector);
-            bmpVector.Dispose();
+            Bitmap bmp = new Bitmap(filename);
+            byte[] data = GetSmallImageData(bmp, 9, 8);
+            bmp.Dispose();
 
             // モノクロ化
             int[] mono = new int[data.Length / 4];
@@ -103,6 +96,61 @@ namespace Mpga.ImageSearchEngine
                     p++;
                 }
                 p++;
+            }
+            return result;
+        }
+
+        private byte[] GetSmallImageData(Bitmap bmp, int width, int height)
+        {
+            // 入力画像は32bitARGBではないことがあるので
+            // 以下の処理の簡素化のため32bitARGBに統一
+            byte[] bmp32Data;
+            using (Bitmap bmp32 = new Bitmap(bmp.Width, bmp.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bmp32))
+                {
+                    g.DrawImageUnscaled(bmp, new Point(0, 0));
+                }
+                bmp32Data = BitmapToByteArray(bmp32);
+            }
+
+            // 等間隔にサンプリングして平均をとる
+            byte[] result = new byte[width * height * 4];
+            int s = 12; // s*s = サンプリング数
+            int pos = 0;
+            for (int y = 0; y < height; y++)
+            {
+                for(int x = 0; x < width; x++)
+                {
+                    int srcX0 = x * bmp.Width / width;
+                    int srcY0 = y * bmp.Height / height;
+
+                    int r = 0;
+                    int g = 0;
+                    int b = 0;
+                    int a = 0;
+
+                    // 縮小した画素に対して縮小元から s * s 画素を取得し
+                    // 平均値を計算
+                    for (int yy = 0; yy < s; yy++)
+                    {
+                        for (int xx = 0; xx < s; xx++)
+                        {
+                            int dx = xx * bmp.Width / width / s;
+                            int dy = yy * bmp.Height / height / s;
+                            int p = ((srcX0 + dx) + (srcY0 + dy) * bmp.Width) * 4;
+                            b += bmp32Data[p];
+                            g += bmp32Data[p + 1];
+                            r += bmp32Data[p + 2];
+                            a += bmp32Data[p + 3];
+                        }
+                    }
+
+                    result[pos++] = (byte)(b / s / s);
+                    result[pos++] = (byte)(g / s / s);
+                    result[pos++] = (byte)(r / s / s);
+                    result[pos++] = (byte)(a / s / s);
+                }
             }
             return result;
         }

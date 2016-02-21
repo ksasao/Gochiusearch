@@ -55,6 +55,17 @@ namespace Mpga.Gochiusearch
                 this.comboBox1.Items.Add(i);
             }
             this.comboBox1.SelectedIndex = 3;
+
+            // OSを判別しフォントを変更
+            var version = Environment.OSVersion.ToString();
+            if (version.StartsWith("Unix")) // Mac OS X
+            {
+                foreach(Control c in this.Controls)
+                {
+                    var size = c.Font.Size;
+                    c.Font = new Font("Hiragino Kaku Gothic ProN", size);
+                }
+            }
         }
 
         private void LoadImageInfo()
@@ -163,6 +174,7 @@ namespace Mpga.Gochiusearch
                 _currentTarget = file;
             }
             FindImage(file);
+
         }
 
         private void FindImage(string file)
