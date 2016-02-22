@@ -61,7 +61,7 @@ namespace Mpga.Gochiusearch
             var version = Environment.OSVersion.ToString();
             if (version.StartsWith("Unix")) // Mac OS X
             {
-                foreach(Control c in this.Controls)
+                foreach (Control c in this.Controls)
                 {
                     var size = c.Font.Size;
                     c.Font = new Font("Hiragino Kaku Gothic ProN", size);
@@ -74,7 +74,8 @@ namespace Mpga.Gochiusearch
             try
             {
                 _iv = new ImageSearch();
-                _iv.LoadFromDb("index.db");
+                var cwd = AppDomain.CurrentDomain.BaseDirectory;
+                _iv.LoadFromDb(Path.Combine(cwd, "index.db"));
             }
             catch
             {
@@ -82,23 +83,25 @@ namespace Mpga.Gochiusearch
                 Environment.Exit(1);
             }
         }
+
         private void LoadStoryInfo()
         {
             try
             {
-                string[] lines = File.ReadAllLines("index.txt");
+                var cwd = AppDomain.CurrentDomain.BaseDirectory;
+                string[] lines = File.ReadAllLines(Path.Combine(cwd, "index.txt"));
                 for (int i = 0; i < lines.Length; i++)
                 {
                     string[] data = lines[i].Split(',');
                     if (data.Length == 4)
                     {
                         _story.Add(new StoryInfo
-                        {
-                            TitleId = Convert.ToInt16(data[0]),
-                            EpisodeId = Convert.ToInt16(data[1]),
-                            Title = data[2],
-                            Url = data[3]
-                        });
+                            {
+                                TitleId = Convert.ToInt16(data[0]),
+                                EpisodeId = Convert.ToInt16(data[1]),
+                                Title = data[2],
+                                Url = data[3]
+                            });
                     }
                 }
 
@@ -112,6 +115,7 @@ namespace Mpga.Gochiusearch
 
 
         bool _isUrl = false;
+
         private void Form1_DragEnter(object sender, DragEventArgs e)
         {
             _isUrl = false;
@@ -134,12 +138,12 @@ namespace Mpga.Gochiusearch
             if (e.Data.GetDataPresent(DataFormats.Text))
             {
                 string url = e.Data.GetData("Text") as string;
-                if(url == null)
+                if (url == null)
                 {
                     return;
                 }
                 url = url.ToLower();
-                if(url.EndsWith("jpg") || url.EndsWith("jpeg")
+                if (url.EndsWith("jpg") || url.EndsWith("jpeg")
                     || url.EndsWith("gif") || url.EndsWith("png") || url.EndsWith("bmp"))
                 {
                     _isUrl = true;
@@ -148,7 +152,7 @@ namespace Mpga.Gochiusearch
             }
         }
 
-        private void Form1_DragDrop(object sender, DragEventArgs e)
+        public virtual void Form1_DragDrop(object sender, DragEventArgs e)
         {
             if (_isUrl)
             {
@@ -223,15 +227,15 @@ namespace Mpga.Gochiusearch
                 return;
             }
         
-            for(int i = 0; i < log.Length; i++)
+            for (int i = 0; i < log.Length; i++)
             {
                 var scene = log[i];
                 int titleId = scene[0].TitleId;
                 int episodeId = scene[0].EpisodeId;
 
                 var storyInfo = (from c in _story
-                         where c.TitleId == titleId && c.EpisodeId == episodeId
-                         select c).First();
+                                             where c.TitleId == titleId && c.EpisodeId == episodeId
+                                             select c).First();
 
                 string title = storyInfo.Title;
                 int second = (int)(1.0 * scene[0].Frame / 29.907);
@@ -259,6 +263,7 @@ namespace Mpga.Gochiusearch
         {
             OpenUrl(e.LinkText);
         }
+
         private void OpenUrl(string url)
         {
             _p = Process.Start(url);
