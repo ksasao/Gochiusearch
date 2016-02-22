@@ -1,17 +1,17 @@
-﻿using System;
-using System.Drawing;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
-using MonoMac.ObjCRuntime;
-using Mpga.Gochiusearch;
+﻿using Mpga.Gochiusearch;
+using System.Windows.Forms;
+using System;
 
 namespace Gochiusearch.MonoMac
 {
     class MainClass
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            Program.Main();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new NativeMainForm());
         }
     }
 }

@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace Mpga.Gochiusearch
 {
-    public static class Program
+    static class Program
     {
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
-        public static void Main()
+        static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
