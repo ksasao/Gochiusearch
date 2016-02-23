@@ -19,14 +19,21 @@
 画像は、9x8ピクセルに縮小したものをグレースケール化し、横方向に隣接するピクセル間の輝度差をビットベクトルとしています。
 コア部分のみ抜き出したコードは https://gist.github.com/ksasao/e625d590801dce98c5e0 を参照してください。
 
-## Mac対応
+## ビルド方法
+### Windows
+左上の「Download ZIP」からソースコードをダウンロードし、Visual Studio 2013 または Visual Studio 2015 で src\Gochiusearch.sln を開き、Gochiusearch プロジェクトをビルド、実行してください。
+無料の Visual Studio Community でもビルドできます。
+https://www.visualstudio.com/downloads/download-visual-studio-vs 
+Mono / Xamarin は不要です。
+
+### Mac
 Xamarin Studio を利用して Mac上でビルド・実行することが可能です。
 Xamarin Studio は http://www.monodevelop.com/download/ からダウンロードしてください。Mono + GTK# もインストールが必要です。
 左上の「Download ZIP」からソースコードをダウンロードし、Xamarin Studio で、src/Gochiusearch.MonoMac.sln を開いて実行してください。
 
 ![Macでの動作](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/mac.png)
 
-## Linux対応
+### Linux
 MonoDevelop を利用して Linux上でビルド・実行することが可能です。
 Ubuntu の場合は、Ubuntu Software Center から MonoDevelop をインストールしたのち、
 左上の「Download ZIP」からソースコードをダウンロードし、MonoDevelop で、src/Gochiusearch.sln を開いて実行してください。
