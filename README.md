@@ -22,7 +22,7 @@
 ## Mac対応
 Xamarin Studio を利用して Mac上でビルド・実行することが可能です。
 Xamarin Studio は http://www.monodevelop.com/download/ からダウンロードしてください。Mono + GTK# もインストールが必要です。
-左上の「Download ZIP」からソースコードをダウンロードし、Xamarin Studio で、src/Gochiusearch.sln を開いて実行してください。
+左上の「Download ZIP」からソースコードをダウンロードし、Xamarin Studio で、src/Gochiusearch.MonoMac.sln を開いて実行してください。
 
 ![Macでの動作](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/mac.png)
 
