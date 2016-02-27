@@ -125,6 +125,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) $(ProjectDir)..\..\Tools\
+mkdir $(ProjectDir)..\..\Tools\
+copy /y $(TargetDir)*.dll $(ProjectDir)..\..\Tools\
+copy /y $(TargetDir)index.* $(ProjectDir)..\..\Tools\
+copy /y $(TargetDir)readme.txt $(ProjectDir)..\..\Tools\</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
