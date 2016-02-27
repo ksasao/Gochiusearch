@@ -79,7 +79,7 @@ namespace Mpga.Gochiusearch
             }
             catch
             {
-                MessageBox.Show("index.db ファイルの読み込みに失敗しました", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("index.db is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(1);
             }
         }
@@ -109,7 +109,7 @@ namespace Mpga.Gochiusearch
             }
             catch
             {
-                MessageBox.Show("index.txt ファイルの読み込みに失敗しました", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("index.txt is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(1);
             }
         }
