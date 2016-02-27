@@ -57,14 +57,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Script\readme.txt" />
+    <Content Include="Script\readme-index.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>mkdir $(ProjectDir)..\..\Tools\
-copy /y $(TargetDir)$(TargetFileName) $(ProjectDir)..\..\Tools\
-copy /y $(TargetDir)*.dll $(ProjectDir)..\..\Tools\
-copy /y $(ProjectDir)\Script\*.* $(ProjectDir)..\..\Tools\</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
