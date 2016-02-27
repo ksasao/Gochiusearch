@@ -8,6 +8,6 @@ namespace Mpga.ImageSearchEngine
         public ulong Hash;
         public UInt16 TitleId;
         public UInt16 EpisodeId;
-        public UInt16 Frame;
+        public UInt32 Frame;
     }
 }

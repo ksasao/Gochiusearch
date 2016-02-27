@@ -93,14 +93,15 @@ namespace Mpga.Gochiusearch
                 for (int i = 0; i < lines.Length; i++)
                 {
                     string[] data = lines[i].Split(',');
-                    if (data.Length == 4)
+                    if (data.Length == 5)
                     {
                         _story.Add(new StoryInfo
                             {
                                 TitleId = Convert.ToInt16(data[0]),
                                 EpisodeId = Convert.ToInt16(data[1]),
-                                Title = data[2],
-                                Url = data[3]
+                                FrameRate = (float)Convert.ToDouble(data[2]),
+                                Title = data[3],
+                                Url = data[4]
                             });
                     }
                 }
@@ -238,7 +239,7 @@ namespace Mpga.Gochiusearch
                                              select c).First();
 
                 string title = storyInfo.Title;
-                int second = (int)(1.0 * scene[0].Frame / 29.907);
+                int second = (int)(1.0 * scene[0].Frame / storyInfo.FrameRate);
                 string time = string.Format("{0}:{1:00}", (int)(second / 60), (second % 60));
                 data.Add(title + time + "付近");
 

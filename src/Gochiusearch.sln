@@ -9,12 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateIndex", "CreateIndex\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gochiusearch", "Gochiusearch\Gochiusearch.csproj", "{CAADB055-271D-4A84-8309-9EAA9DBA9ACF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Script", "Script", "{B2B5EBC5-AD71-4C02-BEC3-C92C3A0F2F74}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Users\ksasa_000\Desktop\avi2jpg.bat = ..\..\..\Users\ksasa_000\Desktop\avi2jpg.bat
-		..\..\..\Users\ksasa_000\Desktop\repeat.bat = ..\..\..\Users\ksasa_000\Desktop\repeat.bat
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateDb", "CreateDb\CreateDb.csproj", "{307CF55D-D95A-4A20-BF1F-D05427B62E7B}"
 EndProject
 Global

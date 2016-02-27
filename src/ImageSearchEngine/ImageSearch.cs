@@ -47,7 +47,7 @@ namespace Mpga.ImageSearchEngine
                             ulong hash = br.ReadUInt64();
                             UInt16 titleId = br.ReadUInt16();
                             UInt16 episodeId = br.ReadUInt16();
-                            UInt16 frame = br.ReadUInt16();
+                            UInt32 frame = br.ReadUInt32();
                             _info[i] = new ImageInfo
                             {
                                 Hash = hash,

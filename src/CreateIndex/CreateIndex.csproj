@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Script\avi2jpg.bat" />
+    <None Include="Script\repeat.bat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImageSearchEngine\ImageSearchEngine.csproj">
@@ -54,7 +56,15 @@
       <Name>ImageSearchEngine</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Script\readme.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) $(ProjectDir)..\..\Tools\
+copy $(TargetDir)*.dll $(ProjectDir)..\..\Tools\
+copy $(ProjectDir)\Script\*.* $(ProjectDir)..\..\Tools\</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

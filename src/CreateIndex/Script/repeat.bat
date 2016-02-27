@@ -23,4 +23,3 @@ call avi2jpg.bat 1_09.mp4
 call avi2jpg.bat 1_10.mp4
 call avi2jpg.bat 1_11.mp4
 call avi2jpg.bat 1_12.mp4
-

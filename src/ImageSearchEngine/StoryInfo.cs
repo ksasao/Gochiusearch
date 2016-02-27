@@ -7,6 +7,7 @@ namespace Mpga.ImageSearchEngine
     {
         public int TitleId;
         public int EpisodeId;
+        public float FrameRate;
         public string Title;
         public string Url;
     }
