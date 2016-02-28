@@ -12,7 +12,7 @@
 配布中のアプリは Windows/Mac 向けですが、Linuxでも以下の手順で動作させることができます。
 
 ### Windows 版
-- [Gochiusearch 1.1.5092.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/Gochiusearch-1.1.5092.28922.zip?raw=true) (2016/2/28)
+- [Gochiusearch 1.1.5902.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/Gochiusearch-1.1.5902.28922.zip?raw=true) (2016/2/28)
 
 ### Mac 版
 - [Gochiusearch.MonoMac 1.1.5902.25844](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Mac/Gochiusearch.MonoMac-1.1.5902.25844.zip?raw=true) (2016/2/28)
@@ -20,7 +20,7 @@
 ## Gochiusearch Tools
 手持ちの動画を Gochiusearch で検索できるようにしたい方向けツール
 ### Windows 版
-- [GochiusearchTools 1.1.5092.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/GochiusearchTools-1.1.5092.28922.zip?raw=true) (2016/2/28)
+- [GochiusearchTools 1.1.5902.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/GochiusearchTools-1.1.5902.28922.zip?raw=true) (2016/2/28)
 - [作成方法](https://github.com/ksasao/Gochiusearch/blob/master/src/CreateIndex/Script/readme-index.txt)
 - ファイル形式は今後も変更する可能性があります。
 
