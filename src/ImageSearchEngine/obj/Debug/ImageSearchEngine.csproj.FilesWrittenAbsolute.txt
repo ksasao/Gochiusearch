@@ -1,0 +1,5 @@
+/Users/ksasao/Documents/ksasao/Gochiusearch/src/ImageSearchEngine/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/ksasao/Documents/ksasao/Gochiusearch/src/ImageSearchEngine/bin/Debug/ImageSearchEngine.dll.mdb
+/Users/ksasao/Documents/ksasao/Gochiusearch/src/ImageSearchEngine/bin/Debug/ImageSearchEngine.dll
+/Users/ksasao/Documents/ksasao/Gochiusearch/src/ImageSearchEngine/obj/Debug/ImageSearchEngine.dll
+/Users/ksasao/Documents/ksasao/Gochiusearch/src/ImageSearchEngine/obj/Debug/ImageSearchEngine.dll.mdb
