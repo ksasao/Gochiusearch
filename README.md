@@ -9,9 +9,13 @@
 ![実行イメージ](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/image1.png)
 
 ## ダウンロード
-配布中のアプリは Windows 向けですが、Mac、Linuxでも以下の手順で動作させることができます。
+配布中のアプリは Windows/Mac 向けですが、Linuxでも以下の手順で動作させることができます。
 
+### Windows 版
 - [Gochiusearch 1.1.5897.732](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/Gochiusearch-1.1.5897.732.zip?raw=true) (2016/2/23)
+
+### Mac 版
+- [Gochiusearch 1.1.5902.25844](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Mac/Gochiusearch.MonoMac-1.1.5902.25844.zip?raw=true) (2016/2/28)
 
 ## 技術詳細
 1期、2期の動画に含まれる約100万枚のすべての画像が検索対象です。1枚の画像をわずか8バイト程度まで圧縮することで、
