@@ -19,13 +19,21 @@ namespace CreateIndex
                 Console.WriteLine("usage: createindex input_path output_path");
                 return;
             }
-            _iv = new ImageSearch(args[1]);
-            var files = SetFiles(args[0]);
+
+            try
+            {
+                _iv = new ImageSearch(args[1]);
+                var files = SetFiles(args[0]);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.WriteLine("Finished.");
         }
 
         static private int SetFiles(string path)
         {
+            path = ImageSearch.GetDirectory(path);
             List<string> files = new List<string>();
             files.AddRange(Directory.GetFiles(path, "*.png", SearchOption.AllDirectories));
             files.AddRange(Directory.GetFiles(path, "*.jpg", SearchOption.AllDirectories));

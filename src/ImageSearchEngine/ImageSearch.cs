@@ -20,7 +20,7 @@ namespace Mpga.ImageSearchEngine
 
         public ImageSearch(string basePath)
         {
-            _basePath = basePath;
+            _basePath = ImageSearch.GetDirectory(basePath);
         }
         public ImageSearch(ImageInfo[] info)
         {
@@ -437,6 +437,7 @@ namespace Mpga.ImageSearchEngine
             return path;
         }
 
+
         /// <summary>
         /// Bitmapをbyte[]に変換する
         /// </summary>
@@ -462,5 +463,23 @@ namespace Mpga.ImageSearchEngine
             bmp.UnlockBits(bmpData);
             return rgbValues;
         }
+
+        /// <summary>
+        /// 入力されたpathをフルパスかつ末尾がパス区切り文字となるように
+        /// 変換します。
+        /// </summary>
+        /// <param name="path">ディレクトリ名</param>
+        /// <returns>フルパス</returns>
+        public static string GetDirectory(string path)
+        {
+            var c = Path.DirectorySeparatorChar.ToString();
+            path = Path.GetFullPath(path);
+            if (!path.EndsWith(c))
+            {
+                path += c;
+            }
+            return path;
+        }
+
     }
 }

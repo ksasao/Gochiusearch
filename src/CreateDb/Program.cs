@@ -21,28 +21,38 @@ namespace CreateDb
             }
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            CreateDb(args[0]);
+            try
+            {
+                CreateDb(args[0]);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             watch.Stop();
             Console.WriteLine("{0:0} sec.", watch.ElapsedMilliseconds / 1000);
         }
 
         static void CreateDb(string path)
         {
+            path = ImageSearch.GetDirectory(path);
+
             List<string> files = new List<string>();
             FindFiles(path, "*.jpg", files);
             List<ImageInfo> info = new List<ImageInfo>();
 
             Console.WriteLine("Indexing {0} items...", files.Count);
+            string sp = Path.DirectorySeparatorChar.ToString();
             foreach (var f in files)
             {
-                string hashStr = f.Substring(path.Length, 3 * 8 - 1).Replace(@"\", "");
+                string hashStr = f.Substring(path.Length, 3 * 8 - 1).Replace(sp, "");
                 string filename = Path.GetFileNameWithoutExtension(f);
                 string[] data = filename.Split('_');
 
                 UInt64 hash = Convert.ToUInt64(hashStr, 16);
                 UInt16 titleId = Convert.ToUInt16(data[0]);
                 UInt16 episodeId = Convert.ToUInt16(data[1]);
-                UInt16 frame = Convert.ToUInt16(data[2]);
+                UInt32 frame = Convert.ToUInt32(data[2]);
 
                 info.Add(new ImageInfo
                 {
