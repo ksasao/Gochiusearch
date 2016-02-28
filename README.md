@@ -20,7 +20,8 @@
 ## 手持ちの動画を Gochiusearch で検索できるようにしたい方向け
 ### Windows 版
 - [GochiusearchTools 1.1.5092.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/GochiusearchTools-1.1.5092.28922.zip?raw=true) (2016/2/28)
-* ファイル形式は今後も変更する可能性があります
+-- [作成方法](https://github.com/ksasao/Gochiusearch/blob/master/src/CreateIndex/Script/readme-index.txt)
+-- ファイル形式は今後も変更する可能性があります。
 
 ## 技術詳細
 1期、2期の動画に含まれる約100万枚のすべての画像が検索対象です。1枚の画像をわずか8バイト程度まで圧縮することで、
