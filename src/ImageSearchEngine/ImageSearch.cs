@@ -217,7 +217,7 @@ namespace Mpga.ImageSearchEngine
             // ハミング距離1の探索
             if (level >= 1)
             {
-                for (int i = 0; i < 1 * 64; i++)
+                for (int i = 0; i < 64; i++)
                 {
                     ulong v = vec ^ (ulong)(1UL << i);
                     var p = GetImageInfo(v);
