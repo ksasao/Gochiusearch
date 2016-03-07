@@ -1,4 +1,4 @@
-rem ‚·‚×‚ÄƒŠƒrƒ‹ƒh‚µ‚½ŒãŽÀs‚·‚é
+ï»¿rem ã™ã¹ã¦ãƒªãƒ“ãƒ«ãƒ‰ã—ãŸå¾Œå®Ÿè¡Œã™ã‚‹
 SET OUTPUT=..\..\Tools
 mkdir %OUTPUT%
 copy /y bin\debug\readme.txt %OUTPUT%
