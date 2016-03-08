@@ -1,4 +1,3 @@
-﻿rem すべてリビルドした後実行する
 SET OUTPUT=..\..\Tools
 mkdir %OUTPUT%
 copy /y bin\debug\readme.txt %OUTPUT%
