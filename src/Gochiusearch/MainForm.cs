@@ -23,9 +23,9 @@ namespace Mpga.Gochiusearch
         private string _currentUri = "";
         private string _lastUri = "";
 
-        ImageSearchEngine.ImageSearch _iv = null;
-        Bitmap _bmpCache = null;
-        List<StoryInfo> _story = new List<StoryInfo>();
+        private ImageSearchEngine.ImageSearch _iv = null;
+        private Bitmap _bmpCache = null;
+        private List<StoryInfo> _story = new List<StoryInfo>();
 
         public MainForm()
         {
@@ -90,19 +90,19 @@ namespace Mpga.Gochiusearch
             {
                 var cwd = AppDomain.CurrentDomain.BaseDirectory;
                 string[] lines = File.ReadAllLines(Path.Combine(cwd, "index.txt"));
-                for (int i = 0; i < lines.Length; i++)
+                foreach (string line in lines)
                 {
-                    string[] data = lines[i].Split(',');
+                    string[] data = line.Split(',');
                     if (data.Length == 5)
                     {
                         _story.Add(new StoryInfo
-                            {
-                                TitleId = Convert.ToInt16(data[0]),
-                                EpisodeId = Convert.ToInt16(data[1]),
-                                FrameRate = (float)Convert.ToDouble(data[2]),
-                                Title = data[3],
-                                Url = data[4]
-                            });
+                        {
+                            TitleId = Convert.ToInt16(data[0]),
+                            EpisodeId = Convert.ToInt16(data[1]),
+                            FrameRate = (float)Convert.ToDouble(data[2]),
+                            Title = data[3],
+                            Url = data[4]
+                        });
                     }
                 }
 
@@ -115,41 +115,23 @@ namespace Mpga.Gochiusearch
         }
 
 
-        bool _isUrl = false;
+        private bool _isUrl = false;
 
         private void Form1_DragEnter(object sender, DragEventArgs e)
         {
             _isUrl = false;
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-
-                // ドラッグ中のファイルやディレクトリの取得
-                string[] drags = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-                foreach (string d in drags)
-                {
-                    if (!System.IO.File.Exists(d))
-                    {
-                        // ファイル以外であればイベント・ハンドラを抜ける
-                        return;
-                    }
-                }
                 e.Effect = DragDropEffects.Copy;
             }
-            if (e.Data.GetDataPresent(DataFormats.Text))
+            else if (e.Data.GetDataPresent(DataFormats.Text))
             {
-                string url = e.Data.GetData("Text") as string;
-                if (url == null)
-                {
-                    return;
-                }
-                url = url.ToLower();
-                if (url.EndsWith("jpg") || url.EndsWith("jpeg")
-                    || url.EndsWith("gif") || url.EndsWith("png") || url.EndsWith("bmp"))
-                {
-                    _isUrl = true;
-                    e.Effect = DragDropEffects.Copy;
-                }
+                _isUrl = true;
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
             }
         }
 
@@ -158,6 +140,10 @@ namespace Mpga.Gochiusearch
             if (_isUrl)
             {
                 string url = e.Data.GetData("Text") as string;
+                if (string.IsNullOrEmpty(url) || !IsImage(url))
+                {
+                    return;
+                }
                 using (System.Net.WebClient wc = new System.Net.WebClient())
                 {
                     _currentUri = url;
@@ -175,11 +161,22 @@ namespace Mpga.Gochiusearch
             else
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (!File.Exists(files[0]) || !IsImage(files[0]))
+                {
+                    return;
+                }
                 _currentFile = files[0];
                 _currentUri = _currentFile;
             }
             FindImage(_currentFile);
+        }
 
+        private static bool IsImage(string url)
+        {
+            url = url.ToLower();
+            return url.EndsWith("jpg") || url.EndsWith("jpeg") ||
+                   url.EndsWith("gif") || url.EndsWith("png") ||
+                   url.EndsWith("bmp");
         }
 
         private void FindImage(string file)
@@ -214,29 +211,26 @@ namespace Mpga.Gochiusearch
 
             watch.Start();
             ulong vec = _iv.GetVector(file);
-            this.richTextBox1.Text = ""
-            + "検索画像: " + _currentUri + "\r\n";
+            this.richTextBox1.Text = string.Format("検索画像: {0}{1}", _currentFile, Environment.NewLine);
 
             List<string> data = new List<string>();
             ImageInfo[][] log = _iv.GetSimilarImage(vec, (int)this.comboBox1.SelectedItem);
             watch.Stop();
-            this.richTextBox1.Text += "検索時間: " + watch.ElapsedMilliseconds + " ms\r\n\r\n";
+            this.richTextBox1.Text += string.Format("検索時間: {0} ms{1}{1}", watch.ElapsedMilliseconds, Environment.NewLine);
 
             if (log.Length == 0)
             {
-                this.richTextBox1.Text += "見つかりませんでした。\r\n";
+                this.richTextBox1.Text += "見つかりませんでした。" + Environment.NewLine;
                 return;
             }
-        
+
             for (int i = 0; i < log.Length; i++)
             {
                 var scene = log[i];
                 int titleId = scene[0].TitleId;
                 int episodeId = scene[0].EpisodeId;
 
-                var storyInfo = (from c in _story
-                                             where c.TitleId == titleId && c.EpisodeId == episodeId
-                                             select c).First();
+                var storyInfo = _story.First(c => c.TitleId == titleId && c.EpisodeId == episodeId);
 
                 string title = storyInfo.Title;
                 int second = (int)(1.0 * scene[0].Frame / storyInfo.FrameRate);
@@ -257,7 +251,7 @@ namespace Mpga.Gochiusearch
                 }
             }
 
-            this.richTextBox1.Text += string.Join("\r\n", data.ToArray());
+            this.richTextBox1.Text += string.Join(Environment.NewLine, data.ToArray());
         }
 
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
