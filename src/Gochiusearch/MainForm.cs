@@ -161,7 +161,7 @@ namespace Mpga.Gochiusearch
             else
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (!IsImage(files[0]))
+                if (!File.Exists(files[0]) || !IsImage(files[0]))
                 {
                     return;
                 }
