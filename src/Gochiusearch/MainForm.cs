@@ -122,34 +122,16 @@ namespace Mpga.Gochiusearch
             _isUrl = false;
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-
-                // ドラッグ中のファイルやディレクトリの取得
-                string[] drags = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-                foreach (string d in drags)
-                {
-                    if (!File.Exists(d))
-                    {
-                        // ファイル以外であればイベント・ハンドラを抜ける
-                        return;
-                    }
-                }
                 e.Effect = DragDropEffects.Copy;
             }
-            if (e.Data.GetDataPresent(DataFormats.Text))
+            else if (e.Data.GetDataPresent(DataFormats.Text))
             {
-                string url = e.Data.GetData("Text") as string;
-                if (url == null)
-                {
-                    return;
-                }
-                url = url.ToLower();
-                if (url.EndsWith("jpg") || url.EndsWith("jpeg")
-                    || url.EndsWith("gif") || url.EndsWith("png") || url.EndsWith("bmp"))
-                {
-                    _isUrl = true;
-                    e.Effect = DragDropEffects.Copy;
-                }
+                _isUrl = true;
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
             }
         }
 
@@ -158,6 +140,10 @@ namespace Mpga.Gochiusearch
             if (_isUrl)
             {
                 string url = e.Data.GetData("Text") as string;
+                if (string.IsNullOrEmpty(url) || !IsImage(url))
+                {
+                    return;
+                }
                 using (System.Net.WebClient wc = new System.Net.WebClient())
                 {
                     _currentUri = url;
@@ -175,11 +161,22 @@ namespace Mpga.Gochiusearch
             else
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (!IsImage(files[0]))
+                {
+                    return;
+                }
                 _currentFile = files[0];
                 _currentUri = _currentFile;
             }
             FindImage(_currentFile);
+        }
 
+        private static bool IsImage(string url)
+        {
+            url = url.ToLower();
+            return url.EndsWith("jpg") || url.EndsWith("jpeg") ||
+                   url.EndsWith("gif") || url.EndsWith("png") ||
+                   url.EndsWith("bmp");
         }
 
         private void FindImage(string file)
