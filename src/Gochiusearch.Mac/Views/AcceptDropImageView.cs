@@ -37,7 +37,7 @@ namespace Gochiusearch.Mac
             return NSDragOperation.Copy;
         }
 
-        public override void DraggingEnded(NSDraggingInfo sender)
+        public override bool PerformDragOperation(NSDraggingInfo sender)
         {
             var item = sender.DraggingPasteboard.PasteboardItems.First();
             if (item.Types.Any(x => x == "public.url"))
@@ -50,6 +50,11 @@ namespace Gochiusearch.Mac
                 var url = new NSUrl(item.GetStringForType("public.file-url"));
                 FileDropped?.Invoke(this, new DropEventArgs(url));
             }
+            else
+            {
+                return false;
+            }
+            return true;
         }
     }
 
