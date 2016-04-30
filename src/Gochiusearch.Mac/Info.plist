@@ -3,17 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>Gochiusearch.Mac</string>
+	<string>Gochiusearch</string>
 	<key>CFBundleIdentifier</key>
-	<string>jp.mpga.gochiusearch-mac</string>
+	<string>jp.ailen0ada.Gochiusearch</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0.2</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.9</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<true/>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -21,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2016 ksasao
+	<string>Copyright © 2016 ailen0ada, ksasao
 Licensed under the Apache License, Version 2.0</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
@@ -29,5 +31,12 @@ Licensed under the Apache License, Version 2.0</string>
 	<string>MainMenu</string>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>ja</string>
+		<string>en</string>
+	</array>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.entertainment</string>
 </dict>
 </plist>

@@ -1,0 +1,9 @@
+﻿"NotFound" = "Related story was not found.";
+"LoadFailed" = "Unable to load resource.";
+"Error" = "Error";
+"ErrorNotFound" = "was not found.";
+"ErrorCorrupted" = "is corrupted.";
+"OrNear" = " or near";
+"TargetImage" = "Target image";
+"TimeElapsed" = "Retrieval time";
+"MessageStart" = "Drag and drop an image to search.";

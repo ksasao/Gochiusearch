@@ -1,0 +1,18 @@
+
+/* Class = "NSWindow"; title = "Gochiusearch.Mac"; ObjectID = "2"; */
+"2.title" = "Gochiusearch";
+
+/* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "CTa-7f-hf8"; */
+"CTa-7f-hf8.title" = "Item 2";
+
+/* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "N3p-P3-qVl"; */
+"N3p-P3-qVl.title" = "Item 1";
+
+/* Class = "NSTextFieldCell"; title = "検索レベル:"; ObjectID = "UMA-Va-g0x"; */
+"UMA-Va-g0x.title" = "Depth:";
+
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "u8W-z9-OBu"; */
+"u8W-z9-OBu.title" = "Item 3";
+
+/* Class = "NSButtonCell"; title = "自動的にニコニコ動画を開く"; ObjectID = "ubo-LO-2xf"; */
+"ubo-LO-2xf.title" = "Open Niconico automatically";

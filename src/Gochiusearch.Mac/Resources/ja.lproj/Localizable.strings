@@ -1,0 +1,9 @@
+﻿"NotFound" = "見つかりませんでした。";
+"LoadFailed" = "リソースの読み込みに失敗しました。";
+"Error" = "エラー";
+"ErrorNotFound" = "が見つかりません。";
+"ErrorCorrupted" = "が壊れています。";
+"OrNear" = "付近";
+"TargetImage" = "検索画像";
+"TimeElapsed" = "検索時間";
+"MessageStart" = "画像をドラッグ＆ドロップして検索します。";
