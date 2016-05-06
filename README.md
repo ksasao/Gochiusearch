@@ -15,7 +15,7 @@
 - [Gochiusearch 1.1.5902.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/Gochiusearch-1.1.5902.28922.zip?raw=true) (2016/2/28)
 
 ### Mac 版
-- [Gochiusearch.MonoMac 1.1.5902.25844](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Mac/Gochiusearch.MonoMac-1.1.5902.25844.zip?raw=true) (2016/2/28)
+- [Mac App Store](https://itunes.apple.com/jp/app/gochiusachi/id1110637036?mt=12) (2016/5/6)
 
 ## Gochiusearch Tools
 手持ちの動画を Gochiusearch で検索できるようにしたい方向けツール
