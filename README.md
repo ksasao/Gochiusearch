@@ -15,7 +15,7 @@
 - [Gochiusearch 1.1.5902.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/Gochiusearch-1.1.5902.28922.zip?raw=true) (2016/2/28)
 
 ### Mac 版
-- [Mac App Store](https://itunes.apple.com/jp/app/gochiusachi/id1110637036?mt=12) (2016/5/6)
+- [ごちうサーチ／Mac App Store](https://itunes.apple.com/jp/app/gochiusachi/id1110637036?mt=12) (2016/5/6)
 
 ## Gochiusearch Tools
 手持ちの動画を Gochiusearch で検索できるようにしたい方向けツール
@@ -40,7 +40,7 @@ Mono / Xamarin は不要です。
 ### Mac
 Xamarin Studio を利用して Mac上でビルド・実行することが可能です。
 Xamarin Studio は http://www.monodevelop.com/download/ からダウンロードしてください。Mono + GTK# もインストールが必要です。
-左上の「Download ZIP」からソースコードをダウンロードし、Xamarin Studio で、src/Gochiusearch.MonoMac.sln を開いて実行してください。
+左上の「Download ZIP」からソースコードをダウンロードし、Xamarin Studio で、src/Gochiusearch.Mac.sln を開いて実行してください。
 
 ![Macでの動作](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/mac.png)
 
