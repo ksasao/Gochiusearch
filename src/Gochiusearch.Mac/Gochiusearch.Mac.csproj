@@ -8,7 +8,9 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Gochiusearch.Mac</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
-    <AssemblyName>Gochiusearch.Mac</AssemblyName>
+    <AssemblyName>Gochiusearch</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,12 +27,16 @@
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
     <CreatePackage>false</CreatePackage>
     <CodeSigningKey>Mac Developer</CodeSigningKey>
-    <EnableCodeSigning>false</EnableCodeSigning>
+    <EnableCodeSigning>true</EnableCodeSigning>
     <EnablePackageSigning>false</EnablePackageSigning>
     <LangVersion>6</LangVersion>
+    <PackageSigningKey>Developer ID Installer</PackageSigningKey>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CodeSignProvision>Automatic</CodeSignProvision>
+    <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
+    <DebugType></DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -43,15 +49,49 @@
     <CreatePackage>true</CreatePackage>
     <CodeSigningKey>Developer ID Application</CodeSigningKey>
     <EnableCodeSigning>true</EnableCodeSigning>
-    <EnablePackageSigning>false</EnablePackageSigning>
+    <EnablePackageSigning>true</EnablePackageSigning>
     <LangVersion>6</LangVersion>
     <PackageSigningKey>Developer ID Installer</PackageSigningKey>
+    <LinkMode>Full</LinkMode>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CodeSignProvision></CodeSignProvision>
+    <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
+    <I18n>cjk</I18n>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <Profiling>false</Profiling>
+    <UseRefCounting>true</UseRefCounting>
+    <UseSGen>true</UseSGen>
+    <IncludeMonoRuntime>true</IncludeMonoRuntime>
+    <CreatePackage>true</CreatePackage>
+    <CodeSigningKey>3rd Party Mac Developer Application: Tsubasa HIRANO (VV35DG2GRZ)</CodeSigningKey>
+    <EnableCodeSigning>true</EnableCodeSigning>
+    <EnablePackageSigning>true</EnablePackageSigning>
+    <LangVersion>6</LangVersion>
+    <PackageSigningKey>3rd Party Mac Developer Installer: Tsubasa HIRANO (VV35DG2GRZ)</PackageSigningKey>
+    <LinkMode>Full</LinkMode>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CodeSignProvision>7448c130-d946-41f3-8df2-79211d1976da</CodeSignProvision>
+    <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
+    <I18n>cjk</I18n>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Mac" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="PCLStorage">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
@@ -65,9 +105,21 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon-32%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon-512.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\AppIcon-512%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_16x16.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_16x16%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_32x32.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_32x32%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_128x128.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_128x128%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_256x256.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_256x256%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_512x512.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\icon_512x512%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
+    <None Include="packages.config" />
+    <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -84,16 +136,18 @@
       <DependentUpon>AppDelegate.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\AcceptDropImageView.cs" />
+    <Compile Include="Models\XMImageSearch.cs" />
+    <Compile Include="Models\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="MainMenu.xib" />
-    <InterfaceDefinition Include="MainWindow.xib" />
+    <InterfaceDefinition Include="Resources\Base.lproj\MainMenu.xib" />
+    <InterfaceDefinition Include="Resources\Base.lproj\MainWindow.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\ImageSearchEngine\ImageSearchEngine.csproj">
-      <Project>{A8923558-5B36-4858-B624-7CC9B844ACBC}</Project>
-      <Name>ImageSearchEngine</Name>
+    <ProjectReference Include="..\ImageSearchEngine.Portable\ImageSearchEngine.Portable.csproj">
+      <Project>{AFC31291-8275-469B-8F0B-20AA9C481BFD}</Project>
+      <Name>ImageSearchEngine.Portable</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -109,8 +163,18 @@
       <Link>Resources\index.txt</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\en.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\ja.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\Base.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\en.lproj\MainMenu.strings" />
+    <BundleResource Include="Resources\en.lproj\MainWindow.strings" />
+    <BundleResource Include="Resources\ja.lproj\MainMenu.strings" />
+    <BundleResource Include="Resources\ja.lproj\MainWindow.strings" />
+    <BundleResource Include="Resources\Base.lproj\Credits.rtf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
+    <Folder Include="Models\" />
+    <Folder Include="Resources\Base.lproj\" />
   </ItemGroup>
 </Project>

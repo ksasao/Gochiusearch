@@ -1,16 +1,15 @@
 ﻿using System;
-using Foundation;
-using AppKit;
-using System.Linq;
-using System.Globalization;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System.Reflection;
-using System.IO;
-using Mpga.ImageSearchEngine;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using AppKit;
+using Foundation;
+using Mpga.ImageSearchEngine;
 using System.Net;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Gochiusearch.Mac
 {
@@ -27,9 +26,10 @@ namespace Gochiusearch.Mac
         {
         }
 
-        public MainWindowController()
+        public MainWindowController(NSString containerDirectory)
             : base("MainWindow")
         {
+            tempDirectory = containerDirectory;
         }
 
         public override void AwakeFromNib()
@@ -88,14 +88,18 @@ namespace Gochiusearch.Mac
             stor.EndEditing();
         }
 
-        public override void WindowDidLoad()
+        private readonly NSString tempDirectory;
+
+        public override async void WindowDidLoad()
         {
             base.WindowDidLoad();
 
             InitializeUserInterfaces();
 
-            LoadImageInfo();
+            await LoadImageInfoAsync();
             LoadStoryInfo();
+
+            OutputLog(NSBundle.MainBundle.LocalizedString("MessageStart", "required"));
         }
 
         private void InitializeUserInterfaces()
@@ -117,9 +121,8 @@ namespace Gochiusearch.Mac
             }
             SearchLevelSelector.Menu = levelMenu;
             SearchLevelSelector.SelectItem(3);
-
-            TargetImageView.FileDropped += (sender, e) => FindImage(e.Payload.Path);
-            TargetImageView.ImageUrlDropped += (sender, e) => FindImageByUrl(e.Payload.AbsoluteString);
+            TargetImageView.FileDropped += (sender, e) => FindImage(e.Payload);
+            TargetImageView.ImageUrlDropped += (sender, e) => FindImageByUrl(e.Payload);
         }
 
         /// <summary>
@@ -129,7 +132,7 @@ namespace Gochiusearch.Mac
         private int searchLevel;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="Gochiusearch.Mac.MainWindowController"/> open
+        /// Gets or sets a value indicating whether this <see cref="MainWindowController"/> open
         /// niconico URL on finished searching successfully.
         /// </summary>
         /// <value><c>true</c> if open niconico URL on success; otherwise, <c>false</c>.</value>
@@ -156,23 +159,29 @@ namespace Gochiusearch.Mac
         /// <summary>
         /// Loads the image information from index.db.
         /// </summary>
-        private void LoadImageInfo()
+        private async Task LoadImageInfoAsync()
         {
             var fn = NSBundle.MainBundle.PathForResource("index", "db");
             if (!File.Exists(fn))
             {
-                ShowAlertOnWindow("index.db was not found.", "Unable to load", NSAlertStyle.Critical);
+                ShowAlertOnWindow(
+                    $"index.db {NSBundle.MainBundle.LocalizedString("ErrorNotFound", "optional")}",
+                    NSBundle.MainBundle.LocalizedString("LoadFailed", "optional"),
+                    NSAlertStyle.Critical);
                 NSApplication.SharedApplication.Terminate(this);
             }
 
             try
             {
-                imageSearch = new ImageSearch();
-                imageSearch.LoadFromDb(fn);
+                imageSearch = new XMImageSearch();
+                await imageSearch.LoadFromDbAsync(fn);
             }
             catch
             {
-                ShowAlertOnWindow("index.db is corrupted.", "Unable to load", NSAlertStyle.Critical);
+                ShowAlertOnWindow(
+                    $"index.db {NSBundle.MainBundle.LocalizedString("ErrorCorrupted", "optional")}",
+                    NSBundle.MainBundle.LocalizedString("LoadFailed", "optional"),
+                    NSAlertStyle.Critical);
                 NSApplication.SharedApplication.Terminate(this);
             }
         }
@@ -185,7 +194,10 @@ namespace Gochiusearch.Mac
             var fn = NSBundle.MainBundle.PathForResource("index", "txt");
             if (!File.Exists(fn))
             {
-                ShowAlertOnWindow("index.txt was not found.", "Unable to load", NSAlertStyle.Critical);
+                ShowAlertOnWindow(
+                    $"index.txt {NSBundle.MainBundle.LocalizedString("ErrorNotFound", "optional")}",
+                    NSBundle.MainBundle.LocalizedString("LoadFailed", "optional"),
+                    NSAlertStyle.Critical);
                 NSApplication.SharedApplication.Terminate(this);
             }
 
@@ -207,21 +219,27 @@ namespace Gochiusearch.Mac
             }
             catch
             {
-                ShowAlertOnWindow("index.txt is corrupted.", "Unable to load", NSAlertStyle.Critical);
+                ShowAlertOnWindow(
+                    $"index.txt {NSBundle.MainBundle.LocalizedString("ErrorCorrupted", "optional")}",
+                    NSBundle.MainBundle.LocalizedString("LoadFailed", "optional"),
+                    NSAlertStyle.Critical);
                 NSApplication.SharedApplication.Terminate(this);
             }
         }
 
-        private void FindImageByUrl(string url)
+        private void FindImageByUrl(NSString url)
         {
-            if (!IsImage(url))
-                return;
-            var fn = Path.Combine(NSBundle.MainBundle.ResourcePath, "Browser");
+            var fn = tempDirectory.AppendPathComponent(url.LastPathComponent);
+            // Replacing host to punycode to handle multi-byte domain
+            var r = new Regex(Regex.Escape(url.PathComponents[1]));
+            var punycoded = new IdnMapping().GetAscii(url.PathComponents[1]);
+            var replacedUrl = r.Replace(url, punycoded, 1);
+
             try
             {
-                using (var wc = new WebClient())
+                using (var client = new WebClient())
                 {
-                    wc.DownloadFile(url, fn);
+                    client.DownloadFile(replacedUrl, fn);
                 }
             }
             catch
@@ -230,14 +248,6 @@ namespace Gochiusearch.Mac
                 return;
             }
             FindImage(fn);
-        }
-
-        private static string[] imageExts = { "jpg", "jpeg", "gif", "png", "bmp" };
-
-        private static bool IsImage(string url)
-        {
-            url = url.ToLower();
-            return imageExts.Any(url.EndsWith);
         }
 
         /// <summary>
@@ -253,18 +263,28 @@ namespace Gochiusearch.Mac
         {
             lastUri = file;
             ClearLog();
-            OutputLog($"検索画像: {file}{Environment.NewLine}");
+            OutputLog($"{NSBundle.MainBundle.LocalizedString("TargetImage", "required")}: {file}{Environment.NewLine}");
 
-            var sw = Stopwatch.StartNew();
-            var vector = imageSearch.GetVector(file);
-
-            var ret = imageSearch.GetSimilarImage(vector, searchLevel);
-            sw.Stop();
-            OutputLog($"検索時間: {sw.ElapsedMilliseconds} ms{Environment.NewLine}{Environment.NewLine}");
-
-            if (ret.Length < 1)
+            ImageInfo[][] ret;
+            try
             {
-                OutputLog("見つかりませんでした。");
+                var sw = Stopwatch.StartNew();
+
+                var vector = imageSearch.GetVector(file);
+                ret = imageSearch.GetSimilarImage(vector, searchLevel);
+
+                sw.Stop();
+                OutputLog($"{NSBundle.MainBundle.LocalizedString("TimeElapsed", "required")}: {sw.ElapsedMilliseconds} ms{Environment.NewLine}{Environment.NewLine}");
+
+                if (ret.Length < 1)
+                {
+                    OutputLog(NSBundle.MainBundle.LocalizedString("NotFound", "required"));
+                    return;
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                OutputLog(NSBundle.MainBundle.LocalizedString("NotFound", "required"));
                 return;
             }
 
@@ -283,14 +303,14 @@ namespace Gochiusearch.Mac
                     second = second < 0 ? 0 : second;
                     var url = new NSUrl(storyInfo.Url + "?from=" + second);
 
-                    return new{summary = title + time + "付近",url};
+                    return new { summary = title + time + NSBundle.MainBundle.LocalizedString("OrNear", "required"), url };
                 })
                 .ToArray();
 
             foreach (var result in results)
             {
                 OutputLog(result.summary + Environment.NewLine);
-                OutputLog(result.url.AbsoluteString + Environment.NewLine, new NSStringAttributes{ LinkUrl = result.url });
+                OutputLog(result.url.AbsoluteString + Environment.NewLine, new NSStringAttributes { LinkUrl = result.url });
             }
             if (openNiconicoUrlOnSuccess)
             {
