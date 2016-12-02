@@ -1,38 +1,45 @@
-﻿using AppKit;
+﻿using System;
+using AppKit;
 using Foundation;
 
 namespace Gochiusearch.Mac
 {
-    public partial class AppDelegate : NSApplicationDelegate
-    {
-        MainWindowController mainWindowController;
+	public partial class AppDelegate : NSApplicationDelegate
+	{
+		MainWindowController mainWindowController;
 
-        NSString containerDirectory;
+		NSString containerDirectory;
 
-        public AppDelegate()
-        {
-            containerDirectory = NativeMethods.ContainerDirectory.AppendPathComponent(new NSString(".browser"));
-        }
+		public AppDelegate()
+		{
+			containerDirectory = NativeMethods.ContainerDirectory.AppendPathComponent(new NSString(".browser"));
+		}
 
-        public override void DidFinishLaunching(NSNotification notification)
-        {
-            System.IO.Directory.CreateDirectory(containerDirectory);
-            mainWindowController = new MainWindowController(containerDirectory);
-            mainWindowController.Window.MakeKeyAndOrderFront(this);
-        }
+		public override void DidFinishLaunching(NSNotification notification)
+		{
+			System.IO.Directory.CreateDirectory(containerDirectory);
+			mainWindowController = new MainWindowController(containerDirectory);
+			mainWindowController.Window.MakeKeyAndOrderFront(this);
 
-        public override void WillTerminate(NSNotification notification)
-        {
-            // Insert code here to tear down your application
-            // Clear caches
-            System.IO.Directory.Delete(containerDirectory, true);
-        }
+			// Touchbar
+			if (ObjCRuntime.Class.GetHandle("NSTouchBar") != IntPtr.Zero)
+			{
+				NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+			}
+		}
 
-        public override bool ApplicationShouldTerminateAfterLastWindowClosed(NSApplication sender) => true;
+		public override void WillTerminate(NSNotification notification)
+		{
+			// Insert code here to tear down your application
+			// Clear caches
+			System.IO.Directory.Delete(containerDirectory, true);
+		}
 
-        partial void NavigateToGithub(NSObject sender)
-        {
-            NSWorkspace.SharedWorkspace.OpenUrl(new NSUrl("https://github.com/ksasao/Gochiusearch"));
-        }
-    }
+		public override bool ApplicationShouldTerminateAfterLastWindowClosed(NSApplication sender) => true;
+
+		partial void NavigateToGithub(NSObject sender)
+		{
+			NSWorkspace.SharedWorkspace.OpenUrl(new NSUrl("https://github.com/ksasao/Gochiusearch"));
+		}
+	}
 }

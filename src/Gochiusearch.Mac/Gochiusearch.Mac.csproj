@@ -138,6 +138,7 @@
     <Compile Include="Views\AcceptDropImageView.cs" />
     <Compile Include="Models\XMImageSearch.cs" />
     <Compile Include="Models\NativeMethods.cs" />
+    <Compile Include="Views\ResultTouchBarDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\Base.lproj\MainMenu.xib" />
