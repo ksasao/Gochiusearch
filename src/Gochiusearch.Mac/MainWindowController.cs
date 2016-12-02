@@ -266,8 +266,9 @@ namespace Gochiusearch.Mac
 			lastUri = file;
 			ClearLog();
 			OutputLog($"{NSBundle.MainBundle.LocalizedString("TargetImage", "required")}: {file}{Environment.NewLine}");
-
-			ImageInfo[][] ret;
+            NSApplication.SharedApplication.ActivateIgnoringOtherApps(true);
+			
+            ImageInfo[][] ret;
 			try
 			{
 				var sw = Stopwatch.StartNew();
