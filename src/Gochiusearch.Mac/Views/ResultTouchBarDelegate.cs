@@ -72,21 +72,17 @@ namespace Gochiusearch.Mac
 
         private NSImage GetImage()
         {
-            var src = NSImage.FromStream(System.IO.File.OpenRead(filePath));
-            var scaleFactor = BarHeight / src.Size.Height;
+            using (var src = NSImage.FromStream(System.IO.File.OpenRead(filePath)))
+            {
+                var imageSize = src.Size;
+                var thumbnailSize = new CGSize(Math.Ceiling(BarHeight * imageSize.Width / imageSize.Height), BarHeight);
 
-            var width = (nint)(src.Size.Width * scaleFactor);
-            var height = (nint)(src.Size.Height * scaleFactor);
-            var bpc = 8;
-            var stride = 4 * width;
-            var colorSpace = CGColorSpace.CreateDeviceRGB();
-            var info = CGImageAlphaInfo.PremultipliedLast;
-
-            var context = new CGBitmapContext(null, width, height, bpc, stride, colorSpace, info);
-            var rect = new CGRect(0f, 0f, width, height);
-            context.DrawImage(rect, src.CGImage);
-            var ni = context.ToImage();
-            return new NSImage(ni, new CGSize(width, height));
+                var thumbnail = new NSImage(thumbnailSize);
+                thumbnail.LockFocus();
+                src.Draw(new CGRect(CGPoint.Empty, thumbnailSize), new CGRect(CGPoint.Empty, imageSize), NSCompositingOperation.SourceOver, 1f);
+                thumbnail.UnlockFocus();
+                return thumbnail;
+            }
         }
     }
 }
