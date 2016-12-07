@@ -20,12 +20,6 @@ namespace Gochiusearch.Mac
 			System.IO.Directory.CreateDirectory(containerDirectory);
 			mainWindowController = new MainWindowController(containerDirectory);
 			mainWindowController.Window.MakeKeyAndOrderFront(this);
-
-			// Touchbar
-			if (ObjCRuntime.Class.GetHandle("NSTouchBar") != IntPtr.Zero)
-			{
-				NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
-			}
 		}
 
 		public override void WillTerminate(NSNotification notification)
