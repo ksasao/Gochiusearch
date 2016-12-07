@@ -27,7 +27,7 @@
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
     <CreatePackage>false</CreatePackage>
     <CodeSigningKey>Mac Developer</CodeSigningKey>
-    <EnableCodeSigning>true</EnableCodeSigning>
+    <EnableCodeSigning>false</EnableCodeSigning>
     <EnablePackageSigning>false</EnablePackageSigning>
     <LangVersion>6</LangVersion>
     <PackageSigningKey>Developer ID Installer</PackageSigningKey>
@@ -77,7 +77,7 @@
     <PackageSigningKey>3rd Party Mac Developer Installer: Tsubasa HIRANO (VV35DG2GRZ)</PackageSigningKey>
     <LinkMode>Full</LinkMode>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <CodeSignProvision>7448c130-d946-41f3-8df2-79211d1976da</CodeSignProvision>
+    <CodeSignProvision>Gochiusearch Production</CodeSignProvision>
     <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
     <I18n>cjk</I18n>
   </PropertyGroup>
@@ -138,6 +138,7 @@
     <Compile Include="Views\AcceptDropImageView.cs" />
     <Compile Include="Models\XMImageSearch.cs" />
     <Compile Include="Models\NativeMethods.cs" />
+    <Compile Include="Views\ResultTouchBarDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\Base.lproj\MainMenu.xib" />
