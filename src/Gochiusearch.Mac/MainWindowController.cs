@@ -320,7 +320,10 @@ namespace Gochiusearch.Mac
 				NSWorkspace.SharedWorkspace.OpenUrl(results[0].url);
 			}
 
-            ShowTouchBar(results[0].summary, results[0].url, file);
+            if (ObjCRuntime.Class.GetHandle("NSTouchBar") != IntPtr.Zero)
+            {
+                ShowTouchBar(results[0].summary, results[0].url, file);
+            }
 		}
 
 		private void ShowTouchBar(string result, NSUrl url, string file)
