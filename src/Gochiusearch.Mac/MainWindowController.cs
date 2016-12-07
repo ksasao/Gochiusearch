@@ -281,13 +281,15 @@ namespace Gochiusearch.Mac
 
 				if (ret.Length < 1)
 				{
-					OutputLog(NSBundle.MainBundle.LocalizedString("NotFound", "required"));
-					return;
+                    throw new InvalidOperationException();
 				}
 			}
 			catch (InvalidOperationException)
 			{
-				OutputLog(NSBundle.MainBundle.LocalizedString("NotFound", "required"));
+                var msg = NSBundle.MainBundle.LocalizedString("NotFound", "required");
+				OutputLog(msg);
+                if (SupportsTouchBar())
+                    ShowTouchBar(msg, null, file);
 				return;
 			}
 
@@ -320,23 +322,25 @@ namespace Gochiusearch.Mac
 				NSWorkspace.SharedWorkspace.OpenUrl(results[0].url);
 			}
 
-            if (ObjCRuntime.Class.GetHandle("NSTouchBar") != IntPtr.Zero)
+            if (SupportsTouchBar())
             {
                 ShowTouchBar(results[0].summary, results[0].url, file);
             }
-		}
+        }
 
-		private void ShowTouchBar(string result, NSUrl url, string file)
-		{
-			HideTouchBar();
-			var bar = new NSTouchBar
-			{
-				Delegate = new ResultTouchBarDelegate(result, url, file),
+        private void ShowTouchBar(string result, NSUrl url, string file)
+        {
+            HideTouchBar();
+            var bar = new NSTouchBar
+            {
+                Delegate = new ResultTouchBarDelegate(result, url, file),
                 DefaultItemIdentifiers = ResultTouchBarDelegate.DefaultIdentifiers
-			};
+            };
             this.SetTouchBar(bar);
-		}
+        }
 
-		private void HideTouchBar() => this.SetTouchBar(null);
-	}
+        private void HideTouchBar() => this.SetTouchBar(null);
+
+        private bool SupportsTouchBar() => ObjCRuntime.Class.GetHandle("NSTouchBar") != IntPtr.Zero;
+    }
 }

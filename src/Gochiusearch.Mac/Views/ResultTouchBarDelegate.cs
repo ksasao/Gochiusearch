@@ -30,14 +30,30 @@ namespace Gochiusearch.Mac
                     item.View = new NSImageView { Image = GetImage(), ImageScaling = NSImageScale.ProportionallyDown };
                     break;
                 case 1:
-                    item.View = NSButton.CreateButton(NSImage.ImageNamed(NSImageName.TouchBarPlayTemplate), () => NSWorkspace.SharedWorkspace.OpenUrl(url));
+                    if (url == null)
+                    {
+                        item.View = new NSImageView { Image = NSImage.ImageNamed(NSImageName.Caution) };
+                    }
+                    else
+                    {
+                        item.View = NSButton.CreateButton(NSImage.ImageNamed(NSImageName.TouchBarPlayTemplate), () => NSWorkspace.SharedWorkspace.OpenUrl(url));
+                    }
                     break;
                 case 2:
+                    var view = new NSScrollView
+                    {
+                        HasVerticalScroller = false,
+                        HasHorizontalScroller = true,
+                        BorderType = NSBorderType.NoBorder
+                    };
+                    item.View = view;
+
                     // trim title
-                    var start = result.IndexOf('「');
-                    var end = result.IndexOf('」');
-                    var summary = result.Substring(0, start) + " " + result.Substring(end + 1);
-                    item.View = NSTextField.CreateLabel(summary);
+                    var label = NSTextField.CreateLabel(result);
+                    var size = label.AttributedStringValue.Size;
+                    label.SetBoundsOrigin(new CGPoint(0, (BarHeight - size.Height) / 2));
+                    label.SetFrameSize(new CGSize(size.Width + 8, BarHeight));
+                    view.DocumentView = label;
                     break;
                 default:
                     break;
