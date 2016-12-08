@@ -30,14 +30,30 @@ namespace Gochiusearch.Mac
                     item.View = new NSImageView { Image = GetImage(), ImageScaling = NSImageScale.ProportionallyDown };
                     break;
                 case 1:
-                    item.View = NSButton.CreateButton(NSImage.ImageNamed(NSImageName.TouchBarPlayTemplate), () => NSWorkspace.SharedWorkspace.OpenUrl(url));
+                    if (url == null)
+                    {
+                        item.View = new NSImageView { Image = NSImage.ImageNamed(NSImageName.Caution) };
+                    }
+                    else
+                    {
+                        item.View = NSButton.CreateButton(NSImage.ImageNamed(NSImageName.TouchBarPlayTemplate), () => NSWorkspace.SharedWorkspace.OpenUrl(url));
+                    }
                     break;
                 case 2:
+                    var view = new NSScrollView
+                    {
+                        HasVerticalScroller = false,
+                        HasHorizontalScroller = true,
+                        BorderType = NSBorderType.NoBorder
+                    };
+                    item.View = view;
+
                     // trim title
-                    var start = result.IndexOf('「');
-                    var end = result.IndexOf('」');
-                    var summary = result.Substring(0, start) + " " + result.Substring(end + 1);
-                    item.View = NSTextField.CreateLabel(summary);
+                    var label = NSTextField.CreateLabel(result);
+                    var size = label.AttributedStringValue.Size;
+                    label.SetBoundsOrigin(new CGPoint(0, (BarHeight - size.Height) / 2));
+                    label.SetFrameSize(new CGSize(size.Width + 8, BarHeight));
+                    view.DocumentView = label;
                     break;
                 default:
                     break;
@@ -56,21 +72,17 @@ namespace Gochiusearch.Mac
 
         private NSImage GetImage()
         {
-            var src = NSImage.FromStream(System.IO.File.OpenRead(filePath));
-            var scaleFactor = BarHeight / src.Size.Height;
+            using (var src = NSImage.FromStream(System.IO.File.OpenRead(filePath)))
+            {
+                var imageSize = src.Size;
+                var thumbnailSize = new CGSize(Math.Ceiling(BarHeight * imageSize.Width / imageSize.Height), BarHeight);
 
-            var width = (nint)(src.Size.Width * scaleFactor);
-            var height = (nint)(src.Size.Height * scaleFactor);
-            var bpc = 8;
-            var stride = 4 * width;
-            var colorSpace = CGColorSpace.CreateDeviceRGB();
-            var info = CGImageAlphaInfo.PremultipliedLast;
-
-            var context = new CGBitmapContext(null, width, height, bpc, stride, colorSpace, info);
-            var rect = new CGRect(0f, 0f, width, height);
-            context.DrawImage(rect, src.CGImage);
-            var ni = context.ToImage();
-            return new NSImage(ni, new CGSize(width, height));
+                var thumbnail = new NSImage(thumbnailSize);
+                thumbnail.LockFocus();
+                src.Draw(new CGRect(CGPoint.Empty, thumbnailSize), new CGRect(CGPoint.Empty, imageSize), NSCompositingOperation.SourceOver, 1f);
+                thumbnail.UnlockFocus();
+                return thumbnail;
+            }
         }
     }
 }
