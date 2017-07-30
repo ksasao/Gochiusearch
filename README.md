@@ -30,6 +30,14 @@
 画像は、9x8ピクセルに縮小したものをグレースケール化し、横方向に隣接するピクセル間の輝度差をビットベクトルとしています。
 コア部分のみ抜き出したコードは https://gist.github.com/ksasao/e625d590801dce98c5e0 を参照してください。
 
+アルゴリズムについては下記も参照してください。
+- [ごちうサーチ - SlideShare](https://www.slideshare.net/ksasao/ss-72025009)
+
+### ベクトル化
+![ベクトル化](https://user-images.githubusercontent.com/179872/28755112-2fd68226-758e-11e7-97b3-6c4e4fbda5d4.png)
+### 検索
+![検索](https://user-images.githubusercontent.com/179872/28755120-63d81b34-758e-11e7-8098-fca759a13ea5.png)
+
 ## ビルド方法
 ### Windows
 左上の「Download ZIP」からソースコードをダウンロードし、Visual Studio 2013 または Visual Studio 2015 で src\Gochiusearch.sln を開き、Gochiusearch プロジェクトをビルド、実行してください。
