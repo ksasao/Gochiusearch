@@ -22,5 +22,29 @@ namespace Mpga.Gochiusearch.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("$(MyPictures)\\Gochiusearch\\$(title)_$(mm)：$(ss).$(ext)")]
+        public string Rule {
+            get {
+                return ((string)(this["Rule"]));
+            }
+            set {
+                this["Rule"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CopyFile {
+            get {
+                return ((bool)(this["CopyFile"]));
+            }
+            set {
+                this["CopyFile"] = value;
+            }
+        }
     }
 }

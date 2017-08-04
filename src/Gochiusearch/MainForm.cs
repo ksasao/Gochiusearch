@@ -27,6 +27,8 @@ namespace Mpga.Gochiusearch
         private Bitmap _bmpCache = null;
         private List<StoryInfo> _story = new List<StoryInfo>();
 
+        SettingsForm settingsForm = new SettingsForm();
+
         public MainForm()
         {
             InitializeComponent();
@@ -237,6 +239,14 @@ namespace Mpga.Gochiusearch
                 string time = string.Format("{0}:{1:00}", (int)(second / 60), (second % 60));
                 data.Add(title + time + "付近");
 
+                if(i==0 && settingsForm.CopyFile)
+                {
+                    string newpath =　settingsForm.GetNewFilename(file, title, TimeSpan.FromSeconds(second));
+                    string folder = Path.GetDirectoryName(newpath);
+                    Directory.CreateDirectory(folder);
+                    File.Copy(file, newpath);
+                    data.Add("Copy to " + newpath);
+                }
                 // ニコニコ動画の頭出し付きリンクを生成
                 second -= 6; // 6秒手前から(動画のキーフレームの位置によりずれる)
                 second = second < 0 ? 0 : second;
@@ -269,6 +279,18 @@ namespace Mpga.Gochiusearch
             if (_lastUri != "")
             {
                 FindImage(_currentFile);
+            }
+        }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(settingsForm.ShowDialog(this) == DialogResult.OK)
+            {
+                settingsForm.SaveSettings();
+            }
+            else
+            {
+                settingsForm.LoadSettings();
             }
         }
     }
