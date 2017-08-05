@@ -244,8 +244,25 @@ namespace Mpga.Gochiusearch
                     string newpath =　settingsForm.GetNewFilename(file, title, TimeSpan.FromSeconds(second));
                     string folder = Path.GetDirectoryName(newpath);
                     Directory.CreateDirectory(folder);
-                    File.Copy(file, newpath);
-                    data.Add("Copy to " + newpath);
+                    int count = 0;
+
+                    string f = newpath;
+                    while (true)
+                    {
+                        if (File.Exists(f))
+                        {
+                            count++;
+                            f = folder
+                                + Path.DirectorySeparatorChar
+                                + Path.GetFileNameWithoutExtension(newpath)
+                                + "(" + count.ToString() + ")"
+                                + Path.GetExtension(newpath);
+                            continue;
+                        }
+                        File.Copy(file, f);
+                        break;
+                    }
+                    data.Add("Copy to " + f);
                 }
                 // ニコニコ動画の頭出し付きリンクを生成
                 second -= 6; // 6秒手前から(動画のキーフレームの位置によりずれる)

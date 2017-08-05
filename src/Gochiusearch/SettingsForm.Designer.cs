@@ -97,8 +97,9 @@
             this.textBoxExample.BackColor = System.Drawing.SystemColors.Control;
             this.textBoxExample.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxExample.Location = new System.Drawing.Point(117, 102);
+            this.textBoxExample.Multiline = true;
             this.textBoxExample.Name = "textBoxExample";
-            this.textBoxExample.Size = new System.Drawing.Size(961, 18);
+            this.textBoxExample.Size = new System.Drawing.Size(961, 61);
             this.textBoxExample.TabIndex = 4;
             // 
             // label2
