@@ -12,7 +12,7 @@
 配布中のアプリは Windows/Mac 向けですが、Linuxでも以下の手順で動作させることができます。
 
 ### Windows 版
-- [Gochiusearch 1.1.5902.28922](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/Release/Windows/Gochiusearch-1.1.5902.28922.zip?raw=true) (2016/2/28)
+- [Gochiusearch-1.1.5902.28922_1_2_dms.zip](https://github.com/ksasao/Gochiusearch/files/2540296/Gochiusearch-1.1.5902.28922_1_2_dms.zip) (2018/11/02)
 
 ### Mac 版
 - [ごちうサーチ／Mac App Store](https://itunes.apple.com/jp/app/gochiusachi/id1110637036?mt=12) (2016/5/6)
