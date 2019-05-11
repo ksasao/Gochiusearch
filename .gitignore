@@ -10,6 +10,10 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Windows Store
+Gochiusearch.WindowsStore.sln
+WindowsStore/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
