@@ -69,5 +69,15 @@ namespace Mpga.Gochiusearch.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Icon Gochiusearch {
+            get {
+                object obj = ResourceManager.GetObject("Gochiusearch", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
