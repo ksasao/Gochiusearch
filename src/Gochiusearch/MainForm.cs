@@ -11,6 +11,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,6 +28,7 @@ namespace Mpga.Gochiusearch
         private Bitmap _bmpCache = null;
         private List<StoryInfo> _story = new List<StoryInfo>();
 
+        private static string _tempBrowserImage = "Browser";
         public MainForm()
         {
             InitializeComponent();
@@ -139,18 +141,19 @@ namespace Mpga.Gochiusearch
         {
             if (_isUrl)
             {
-                string url = e.Data.GetData("Text") as string;
-                if (string.IsNullOrEmpty(url) || !IsImage(url))
+                string url = GetImageUrl(e.Data);
+                if (string.IsNullOrEmpty(url))
                 {
                     return;
                 }
                 using (System.Net.WebClient wc = new System.Net.WebClient())
                 {
                     _currentUri = url;
-                    _currentFile = "Browser";
+                    _currentFile = _tempBrowserImage;
                     try
                     {
                         wc.DownloadFile(url, _currentFile);
+                        using (Bitmap bmp = new Bitmap(_currentFile)) { } // 画像ファイルとして開けることを確認
                     }
                     catch
                     {
@@ -169,6 +172,39 @@ namespace Mpga.Gochiusearch
                 _currentUri = _currentFile;
             }
             FindImage(_currentFile);
+        }
+
+        string[] regList = {
+            "\\\"(https://pbs.twimg.com/media/[\\w- ./?%&=]*?)\\\"",
+            "\\\"(https://[\\w-]*?.gstatic.com/[\\w- ./?%&=:]*?)\\\"",
+            "<img .*?src=\\\"(http(s)?://[\\w- ./?%&=:]*?)\\\""
+        };
+
+        private string GetImageUrl(IDataObject obj)
+        {
+            string result = null;
+            string html = obj.GetData("HTML Format") as string;
+            string text = obj.GetData("Text") as string;
+            if (html != null)
+            {
+                html = html.Replace("amp;", "");
+                for(int i=0; i<regList.Length; i++)
+                {
+                    Regex reg = new Regex(regList[i]);
+                    Match match = reg.Match(html);
+                    if (match.Success && match.Groups.Count > 1)
+                    {
+                        result = match.Groups[1].Value;
+                        return result;
+                    }
+                }
+            }
+
+            if (text != null && IsImage(text))
+            {
+                result = text;
+            }
+            return result;
         }
 
         private static bool IsImage(string url)
@@ -211,7 +247,8 @@ namespace Mpga.Gochiusearch
 
             watch.Start();
             ulong vec = _iv.GetVector(file);
-            this.richTextBox1.Text = string.Format("検索画像: {0}{1}", _currentFile, Environment.NewLine);
+            string target = _currentFile == _tempBrowserImage ? _currentUri : _currentFile;
+            this.richTextBox1.Text = string.Format("検索画像: {0}{1}", target, Environment.NewLine);
 
             List<string> data = new List<string>();
             ImageInfo[][] log = _iv.GetSimilarImage(vec, (int)this.comboBox1.SelectedItem);
