@@ -157,7 +157,7 @@ namespace Mpga.Gochiusearch
                 using (System.Net.WebClient wc = new System.Net.WebClient())
                 {
                     _currentUri = url;
-                    _currentFile = _tempBrowserImage;
+                    _currentFile = Path.Combine(Path.GetTempPath(),_tempBrowserImage);
                     try
                     {
                         wc.DownloadFile(url, _currentFile);
@@ -194,7 +194,7 @@ namespace Mpga.Gochiusearch
             if (m.Success && m.Groups.Count > 2)
             {
                 byte[] img = Convert.FromBase64String(m.Groups[2].Value);
-                string filename = Path.GetFullPath($"image{_cacheImageCount}." + m.Groups[1].Value);
+                string filename = Path.Combine(Path.GetTempPath(),$"image{_cacheImageCount}." + m.Groups[1].Value);
                 _cacheImageCount = (_cacheImageCount+1) % 10;
                 File.WriteAllBytes(filename, img);
                 return filename;
