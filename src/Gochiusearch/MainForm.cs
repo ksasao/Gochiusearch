@@ -23,12 +23,13 @@ namespace Mpga.Gochiusearch
         private string _currentFile = "";
         private string _currentUri = "";
         private string _lastUri = "";
+        private int _cacheImageCount = 0;
 
         private ImageSearchEngine.ImageSearch _iv = null;
         private Bitmap _bmpCache = null;
         private List<StoryInfo> _story = new List<StoryInfo>();
 
-        private static string _tempBrowserImage = "Browser";
+        private const string _tempBrowserImage = "Browser";
         public MainForm()
         {
             InitializeComponent();
@@ -139,7 +140,14 @@ namespace Mpga.Gochiusearch
 
         public virtual void Form1_DragDrop(object sender, DragEventArgs e)
         {
-            if (_isUrl)
+            string b64image = GetBase64ImageFile(e.Data);
+            if (b64image != null)
+            {
+                _isUrl = false;
+                _currentFile = b64image;
+                _currentUri = _currentFile;
+            }
+            else if (_isUrl)
             {
                 string url = GetImageUrl(e.Data);
                 if (string.IsNullOrEmpty(url))
@@ -174,14 +182,40 @@ namespace Mpga.Gochiusearch
             FindImage(_currentFile);
         }
 
-        string[] regList = {
+        private string GetBase64ImageFile(IDataObject obj)
+        {
+            string html = obj.GetData("HTML Format") as string;
+            if(html == null)
+            {
+                return null;
+            }
+            Regex b64 = new Regex("<img .*?src=\\\"data:image/([\\w]*?);base64,([\\w/\\+=]*?)\\\"");
+            Match m = b64.Match(html);
+            if (m.Success && m.Groups.Count > 2)
+            {
+                byte[] img = Convert.FromBase64String(m.Groups[2].Value);
+                string filename = Path.GetFullPath($"image{_cacheImageCount}." + m.Groups[1].Value);
+                _cacheImageCount = (_cacheImageCount+1) % 10;
+                File.WriteAllBytes(filename, img);
+                return filename;
+            }
+            return null;
+        }
+        private readonly string[] regList = {
             "\\\"(https://pbs.twimg.com/media/[\\w- ./?%&=]*?)\\\"",
             "\\\"(https://[\\w-]*?.gstatic.com/[\\w- ./?%&=:]*?)\\\"",
             "<img .*?src=\\\"(http(s)?://[\\w- ./?%&=:]*?)\\\""
         };
 
+
         private string GetImageUrl(IDataObject obj)
         {
+            //string[] formats = obj.GetFormats();
+            //for(int i=0; i < formats.Length; i++)
+            //{
+            //    string data = obj.GetData(formats[i]) as string;
+            //}
+
             string result = null;
             string html = obj.GetData("HTML Format") as string;
             string text = obj.GetData("Text") as string;
@@ -198,6 +232,7 @@ namespace Mpga.Gochiusearch
                         return result;
                     }
                 }
+
             }
 
             if (text != null && IsImage(text))
