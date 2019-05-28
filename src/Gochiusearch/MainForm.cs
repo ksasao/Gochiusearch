@@ -201,6 +201,20 @@ namespace Mpga.Gochiusearch
             }
             return null;
         }
+        private string GetImageAsFile(Image image)
+        {
+            if(image == null)
+            {
+                return null;
+            }
+            using(Bitmap bmp = new Bitmap(image))
+            {
+                string filename = Path.GetTempFileName();
+                bmp.Save(filename);
+                return filename;
+            }
+        }
+
         private readonly string[] regList = {
             "\\\"(https://pbs.twimg.com/media/[\\w- ./?%&=]*?)\\\"",
             "\\\"(https://[\\w-]*?.gstatic.com/[\\w- ./?%&=:]*?)\\\"",
@@ -340,6 +354,23 @@ namespace Mpga.Gochiusearch
         {
             if (_lastUri != "")
             {
+                FindImage(_currentFile);
+            }
+        }
+
+
+        private void MainForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == (Keys.V | Keys.Control) && Clipboard.ContainsImage())
+            {
+                string filename = GetImageAsFile(Clipboard.GetImage());
+                if(filename == null)
+                {
+                    return;
+                }
+                _isUrl = false;
+                _currentFile = filename;
+                _currentUri = _currentFile;
                 FindImage(_currentFile);
             }
         }
