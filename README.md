@@ -12,6 +12,7 @@
 配布中のアプリは Windows/Mac 向けですが、Linuxでも以下の手順で動作させることができます。
 
 ### Windows 版
+- [ごちうサーチ／Microsoft Store] (https://www.microsoft.com/ja-jp/p/%E3%81%94%E3%81%A1%E3%81%86%E3%82%B5%E3%83%BC%E3%83%81/9njb7xgz6tk5?activetab=pivot%3Aoverviewtab) (2019/5/9)
 - [Gochiusearch-1.1.5902.28922_1_2_dms.zip](https://github.com/ksasao/Gochiusearch/files/2540296/Gochiusearch-1.1.5902.28922_1_2_dms.zip) (2018/11/02)
 
 ### Mac 版
