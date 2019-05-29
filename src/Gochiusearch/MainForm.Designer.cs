@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -36,12 +37,15 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.rightClickMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.rightClickMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer2
@@ -67,6 +71,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Mpga.Gochiusearch.Properties.Resources.bg;
+            this.pictureBox1.ContextMenuStrip = this.rightClickMenuStrip;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.ErrorImage = global::Mpga.Gochiusearch.Properties.Resources.bg;
             this.pictureBox1.InitialImage = global::Mpga.Gochiusearch.Properties.Resources.bg;
@@ -135,6 +140,22 @@
             this.checkBox1.Text = "自動的にニコニコ動画を開く";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // rightClickMenuStrip
+            // 
+            this.rightClickMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.rightClickMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pasteToolStripMenuItem});
+            this.rightClickMenuStrip.Name = "rightClickMenuStrip";
+            this.rightClickMenuStrip.Size = new System.Drawing.Size(208, 42);
+            this.rightClickMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.RightClickMenuStrip_Opening);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(207, 38);
+            this.pasteToolStripMenuItem.Text = "貼り付け (&P)";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -158,6 +179,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.rightClickMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -170,6 +192,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip rightClickMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
     }
 }
 

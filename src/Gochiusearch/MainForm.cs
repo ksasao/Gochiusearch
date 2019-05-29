@@ -361,10 +361,29 @@ namespace Mpga.Gochiusearch
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == (Keys.V | Keys.Control) && Clipboard.ContainsImage())
+            if (e.KeyData == (Keys.V | Keys.Control))
+            {
+                PasteFromClipboard();
+            }
+        }
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.pasteToolStripMenuItem.Enabled)
+            {
+                PasteFromClipboard();
+            }
+        }
+
+        private void RightClickMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            this.pasteToolStripMenuItem.Enabled = Clipboard.ContainsImage();
+        }
+        private void PasteFromClipboard()
+        {
+            if (Clipboard.ContainsImage())
             {
                 string filename = GetImageAsFile(Clipboard.GetImage());
-                if(filename == null)
+                if (filename == null)
                 {
                     return;
                 }
@@ -374,5 +393,7 @@ namespace Mpga.Gochiusearch
                 FindImage(_currentFile);
             }
         }
+
+
     }
 }
