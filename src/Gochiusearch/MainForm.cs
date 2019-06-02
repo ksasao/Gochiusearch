@@ -24,18 +24,26 @@ namespace Mpga.Gochiusearch
         private string _currentUri = "";
         private string _lastUri = "";
         private int _cacheImageCount = 0;
+        private Navigator _navigator = null;
 
         private ImageSearchEngine.ImageSearch _iv = null;
         private Bitmap _bmpCache = null;
-        private List<StoryInfo> _story = new List<StoryInfo>();
 
         private const string _tempBrowserImage = "Browser";
         public MainForm()
         {
             InitializeComponent();
             InitializeUserComponent();
-
-            LoadStoryInfo();
+            string path = @"index\niconico.txt";
+            try
+            {
+                _navigator = new Navigator(path);
+            }
+            catch
+            {
+                MessageBox.Show($"{path} is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(1);
+            }
             LoadImageInfo();
         }
 
@@ -87,35 +95,7 @@ namespace Mpga.Gochiusearch
             }
         }
 
-        private void LoadStoryInfo()
-        {
-            try
-            {
-                var cwd = AppDomain.CurrentDomain.BaseDirectory;
-                string[] lines = File.ReadAllLines(Path.Combine(cwd, "index.txt"));
-                foreach (string line in lines)
-                {
-                    string[] data = line.Split(',');
-                    if (data.Length == 5)
-                    {
-                        _story.Add(new StoryInfo
-                        {
-                            TitleId = Convert.ToInt16(data[0]),
-                            EpisodeId = Convert.ToInt16(data[1]),
-                            FrameRate = (float)Convert.ToDouble(data[2]),
-                            Title = data[3],
-                            Url = data[4]
-                        });
-                    }
-                }
 
-            }
-            catch
-            {
-                MessageBox.Show("index.txt is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(1);
-            }
-        }
 
 
         private bool _isUrl = false;
@@ -316,17 +296,13 @@ namespace Mpga.Gochiusearch
                 int titleId = scene[0].TitleId;
                 int episodeId = scene[0].EpisodeId;
 
-                var storyInfo = _story.First(c => c.TitleId == titleId && c.EpisodeId == episodeId);
+                var storyInfo = _navigator.Stories.First(c => c.TitleId == titleId && c.EpisodeId == episodeId);
 
                 string title = storyInfo.Title;
-                int second = (int)(1.0 * scene[0].Frame / storyInfo.FrameRate);
-                string time = string.Format("{0}:{1:00}", (int)(second / 60), (second % 60));
+                string time = _navigator.GetTimeString(storyInfo, scene[0].Frame, 0, "<m>:<ss>");
                 data.Add(title + time + "付近");
 
-                // ニコニコ動画の頭出し付きリンクを生成
-                second -= 6; // 6秒手前から(動画のキーフレームの位置によりずれる)
-                second = second < 0 ? 0 : second;
-                string url = storyInfo.Url + "?from=" + second;
+                string url = _navigator.GetSeekUrl(storyInfo, scene[0].Frame);
                 data.Add(url);
                 if (i == 0)
                 {

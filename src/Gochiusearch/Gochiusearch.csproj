@@ -111,7 +111,10 @@
   <ItemGroup>
     <Content Include="bg.png" />
     <Content Include="Gochiusearch.ico" />
-    <Content Include="index.txt">
+    <Content Include="index\d-anime.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="index\niconico.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="readme.txt">

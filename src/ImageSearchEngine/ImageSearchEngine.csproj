@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ImageInfo.cs" />
     <Compile Include="ImageSearch.cs" />
+    <Compile Include="Navigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoryInfo.cs" />
   </ItemGroup>
