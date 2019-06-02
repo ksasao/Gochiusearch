@@ -31,21 +31,52 @@ namespace Mpga.Gochiusearch
         private Bitmap _bmpCache = null;
 
         private const string _tempBrowserImage = "Browser";
+        private Navigator[] _navigators = new Navigator[]{ };
+        private string _defaultNavigator = "niconico";
         public MainForm()
         {
             InitializeComponent();
             InitializeUserComponent();
-            string path = @"index\niconico.txt";
-            try
+            string path = @"index";
+
+            string[] files = Directory.GetFiles(path, "*.txt");
+            List<Navigator> navigators = new List<Navigator>();
+            for(int i=0; i < files.Length; i++)
             {
-                _navigator = new Navigator(path);
+                try
+                {
+                    var n = new Navigator(files[i]);
+                    navigators.Add(n);
+                    this.WebSiteToolStripMenuItem.DropDownItems.Add(n.Name);
+                }
+                catch
+                {
+                    MessageBox.Show($"{path} is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Environment.Exit(1);
+                }
             }
-            catch
-            {
-                MessageBox.Show($"{path} is corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(1);
-            }
+            _navigators = navigators.ToArray();
+            SetNavigator(_defaultNavigator);
             LoadImageInfo();
+        }
+
+        private void SetNavigator(int index)
+        {
+            _navigator = _navigators[index];
+            ToolStripMenuItem checkedItem = this.WebSiteToolStripMenuItem.DropDownItems[index] as ToolStripMenuItem;
+            checkedItem.Select();
+        }
+        private void SetNavigator(string name)
+        {
+            for(int i=0; i < _navigators.Length; i++)
+            {
+                if (_navigators[i].Name == name)
+                {
+                    SetNavigator(i);
+                    return;
+                }
+            }
+            SetNavigator(0);
         }
 
         private void InitializeUserComponent()
@@ -394,6 +425,11 @@ namespace Mpga.Gochiusearch
         private void AutoPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.AutoPlayToolStripMenuItem.Checked = !this.AutoPlayToolStripMenuItem.Checked;
+        }
+
+        private void WebSiteToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            SetNavigator(e.ClickedItem.Text);
         }
     }
 }

@@ -148,6 +148,7 @@
             this.WebSiteToolStripMenuItem.Name = "WebSiteToolStripMenuItem";
             this.WebSiteToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
             this.WebSiteToolStripMenuItem.Text = "動画サイト(&M)";
+            this.WebSiteToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.WebSiteToolStripMenuItem_DropDownItemClicked);
             // 
             // AutoPlayToolStripMenuItem
             // 
