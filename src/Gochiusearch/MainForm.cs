@@ -25,6 +25,7 @@ namespace Mpga.Gochiusearch
         private string _lastUri = "";
         private int _cacheImageCount = 0;
         private Navigator _navigator = null;
+        private int _level = 3;
 
         private ImageSearchEngine.ImageSearch _iv = null;
         private Bitmap _bmpCache = null;
@@ -61,12 +62,14 @@ namespace Mpga.Gochiusearch
 
             // 検索レベル(探索するハミング距離の範囲)の初期化
             // 0はハッシュ値が完全一致(ハミング距離0)の場合
+            
             List<int> item = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             foreach (var i in item)
             {
-                this.comboBox1.Items.Add(i);
+                this.SearchLevelToolStripMenuItem.DropDownItems.Add(i.ToString());
             }
-            this.comboBox1.SelectedIndex = 3;
+            SelectLevel(_level);
+
 
             // OSを判別しフォントを変更
             var version = Environment.OSVersion.ToString();
@@ -280,7 +283,7 @@ namespace Mpga.Gochiusearch
             this.richTextBox1.Text = string.Format("検索画像: {0}{1}", target, Environment.NewLine);
 
             List<string> data = new List<string>();
-            ImageInfo[][] log = _iv.GetSimilarImage(vec, (int)this.comboBox1.SelectedItem);
+            ImageInfo[][] log = _iv.GetSimilarImage(vec, _level);
             watch.Stop();
             this.richTextBox1.Text += string.Format("検索時間: {0} ms{1}{1}", watch.ElapsedMilliseconds, Environment.NewLine);
 
@@ -306,7 +309,7 @@ namespace Mpga.Gochiusearch
                 data.Add(url);
                 if (i == 0)
                 {
-                    if (this.checkBox1.Checked)
+                    if (this.AutoPlayToolStripMenuItem.Checked)
                     {
                         OpenUrl(url);
                     }
@@ -370,6 +373,27 @@ namespace Mpga.Gochiusearch
             }
         }
 
+        private void SearchLevelToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            int level = Convert.ToInt32(e.ClickedItem.Text);
+            SelectLevel(level);
+        }
 
+        private void SelectLevel(int level)
+        {
+            ToolStripMenuItem checkedItem = this.SearchLevelToolStripMenuItem.DropDownItems[level] as ToolStripMenuItem;
+            checkedItem.Select();
+            _level = level;
+        }
+
+        private void SearchLevelToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            SelectLevel(_level);
+        }
+
+        private void AutoPlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.AutoPlayToolStripMenuItem.Checked = !this.AutoPlayToolStripMenuItem.Checked;
+        }
     }
 }
