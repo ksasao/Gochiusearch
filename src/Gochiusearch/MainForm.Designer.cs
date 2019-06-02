@@ -152,6 +152,8 @@
             // 
             // AutoPlayToolStripMenuItem
             // 
+            this.AutoPlayToolStripMenuItem.Checked = true;
+            this.AutoPlayToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AutoPlayToolStripMenuItem.Name = "AutoPlayToolStripMenuItem";
             this.AutoPlayToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
             this.AutoPlayToolStripMenuItem.Text = "動画サイトを自動的に開く(&A)";
@@ -160,8 +162,8 @@
             // MainForm
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(732, 912);
             this.Controls.Add(this.splitContainer2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
