@@ -23,4 +23,4 @@
 1,10,29.99,ご注文はうさぎですか？？第10羽「Eを探す日常」,https://anime.dmkt-sp.jp/animestore/cd_pc?partId=20381010
 1,11,29.99,ご注文はうさぎですか？？第11羽「スターダスト・マイムマイム」,https://anime.dmkt-sp.jp/animestore/cd_pc?partId=20381011
 1,12,29.99,ご注文はうさぎですか？？第12羽「宝物は君の決定的瞬間」,https://anime.dmkt-sp.jp/animestore/cd_pc?partId=20381012
-2,1,29.99,ご注文はうさぎですか？？ ～Dear My Sister～,https://anime.dmkt-sp.jp/animestore/cd_pc?partId=22756001
+2,1,29.99,ご注文はうさぎですか？？ ～Dear My Sister～,0,Chapter.1,https://anime.dmkt-sp.jp/animestore/cd_pc?partId=22756001,35350,Chapter.2,https://anime.dmkt-sp.jp/animestore/cd_pc?partId=22756002,72990,Chapter.3,https://anime.dmkt-sp.jp/animestore/cd_pc?partId=22756003

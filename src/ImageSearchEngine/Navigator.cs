@@ -30,6 +30,14 @@ namespace Mpga.ImageSearchEngine
         }
         public string GetTimeString(StoryInfo storyInfo, uint frame, int offsetSecond, string format)
         {
+            for (int i = storyInfo.Chapter.Length - 1; i > 0; i--)
+            {
+                if (frame >= storyInfo.Chapter[i].StartFrame)
+                {
+                    frame -= storyInfo.Chapter[i].StartFrame;
+                    break;
+                }
+            }
             int second = GetTotalSecond(storyInfo, frame) + offsetSecond;
             second = second > 0 ? second : 0;
 
@@ -47,8 +55,38 @@ namespace Mpga.ImageSearchEngine
         }
         public string GetSeekUrl(StoryInfo storyInfo, uint frame)
         {
+            int chapter = 0;
+            for(int i=storyInfo.Chapter.Length-1; i>0; i--)
+            {
+                if(frame >= storyInfo.Chapter[i].StartFrame)
+                {
+                    chapter = i;
+                    frame -= storyInfo.Chapter[i].StartFrame;
+                    break;
+                }
+            }
             string postUrl = GetTimeString(storyInfo, frame, Offset, SeekFormat);
-            return storyInfo.Url + postUrl;
+            return storyInfo.Chapter[chapter].Url + postUrl;
+        }
+        public string GetTitleWithSubtitle (StoryInfo storyInfo, uint frame)
+        {
+            int chapter = 0;
+            for (int i = storyInfo.Chapter.Length - 1; i > 0; i--)
+            {
+                if (frame >= storyInfo.Chapter[i].StartFrame)
+                {
+                    chapter = i;
+                    break;
+                }
+            }
+            if(storyInfo.Chapter[chapter].Subtitle == "")
+            {
+                return storyInfo.Title;
+            }
+            else
+            {
+                return storyInfo.Title + " " + storyInfo.Chapter[chapter].Subtitle;
+            }
         }
         public int GetTotalSecond(StoryInfo storyInfo, uint frame)
         {
@@ -79,8 +117,36 @@ namespace Mpga.ImageSearchEngine
                         EpisodeId = Convert.ToInt16(data[1]),
                         FrameRate = (float)Convert.ToDouble(data[2]),
                         Title = data[3],
-                        Url = data[4]
+                        Chapter = new Chapter[]{
+                            new Chapter{
+                                Subtitle="",
+                                StartFrame=0,
+                                Url= data[4]
+                            }
+                        }
                     });
+                }
+                else
+                {
+                    List<Chapter> chapter = new List<Chapter>();
+                    for(int j=4; j < data.Length; j += 3)
+                    {
+                        chapter.Add(new Chapter
+                        {
+                            StartFrame = Convert.ToUInt32(data[j]),
+                            Subtitle = data[j + 1],
+                            Url = data[j + 2]
+                        });
+                    }
+                    info.Add(new StoryInfo
+                    {
+                        TitleId = Convert.ToInt16(data[0]),
+                        EpisodeId = Convert.ToInt16(data[1]),
+                        FrameRate = (float)Convert.ToDouble(data[2]),
+                        Title = data[3],
+                        Chapter = chapter.ToArray()
+                    });
+
                 }
             }
             Stories = info.ToArray();

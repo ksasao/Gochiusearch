@@ -314,9 +314,9 @@ namespace Mpga.Gochiusearch
 
                 var storyInfo = _navigator.Stories.First(c => c.TitleId == titleId && c.EpisodeId == episodeId);
 
-                string title = storyInfo.Title;
+                string title = _navigator.GetTitleWithSubtitle(storyInfo, scene[0].Frame);
                 string time = _navigator.GetTimeString(storyInfo, scene[0].Frame, 0, "<m>:<ss>");
-                data.Add(title + time + "付近");
+                data.Add($"{title} {time} 付近");
 
                 string url = _navigator.GetSeekUrl(storyInfo, scene[0].Frame);
                 data.Add(url);
