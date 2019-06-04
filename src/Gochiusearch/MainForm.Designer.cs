@@ -31,22 +31,22 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.rightClickMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WebSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoPlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.rightClickMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.menuStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.rightClickMenuStrip.SuspendLayout();
-            this.menuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer2
@@ -69,6 +69,51 @@
             this.splitContainer2.SplitterDistance = 419;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // menuStripMain
+            // 
+            this.menuStripMain.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStripMain.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileToolStripMenuItem});
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(732, 42);
+            this.menuStripMain.TabIndex = 7;
+            this.menuStripMain.Text = "menuStrip1";
+            // 
+            // FileToolStripMenuItem
+            // 
+            this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SearchLevelToolStripMenuItem,
+            this.WebSiteToolStripMenuItem,
+            this.AutoPlayToolStripMenuItem});
+            this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(129, 38);
+            this.FileToolStripMenuItem.Text = "ファイル(&F)";
+            // 
+            // SearchLevelToolStripMenuItem
+            // 
+            this.SearchLevelToolStripMenuItem.Name = "SearchLevelToolStripMenuItem";
+            this.SearchLevelToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
+            this.SearchLevelToolStripMenuItem.Text = "検索レベル(&L)";
+            this.SearchLevelToolStripMenuItem.DropDownOpening += new System.EventHandler(this.SearchLevelToolStripMenuItem_DropDownOpening);
+            this.SearchLevelToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.SearchLevelToolStripMenuItem_DropDownItemClicked);
+            // 
+            // WebSiteToolStripMenuItem
+            // 
+            this.WebSiteToolStripMenuItem.Name = "WebSiteToolStripMenuItem";
+            this.WebSiteToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
+            this.WebSiteToolStripMenuItem.Text = "動画サイト(&M)";
+            this.WebSiteToolStripMenuItem.DropDownOpening += new System.EventHandler(this.WebSiteToolStripMenuItem_DropDownOpening);
+            this.WebSiteToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.WebSiteToolStripMenuItem_DropDownItemClicked);
+            // 
+            // AutoPlayToolStripMenuItem
+            // 
+            this.AutoPlayToolStripMenuItem.Name = "AutoPlayToolStripMenuItem";
+            this.AutoPlayToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
+            this.AutoPlayToolStripMenuItem.Text = "動画サイトを自動的に開く(&A)";
+            this.AutoPlayToolStripMenuItem.Click += new System.EventHandler(this.AutoPlayToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -113,52 +158,6 @@
             this.richTextBox1.Text = "";
             this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
             // 
-            // menuStripMain
-            // 
-            this.menuStripMain.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.menuStripMain.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FileToolStripMenuItem});
-            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
-            this.menuStripMain.Name = "menuStripMain";
-            this.menuStripMain.Size = new System.Drawing.Size(732, 42);
-            this.menuStripMain.TabIndex = 7;
-            this.menuStripMain.Text = "menuStrip1";
-            // 
-            // FileToolStripMenuItem
-            // 
-            this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SearchLevelToolStripMenuItem,
-            this.WebSiteToolStripMenuItem,
-            this.AutoPlayToolStripMenuItem});
-            this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(129, 38);
-            this.FileToolStripMenuItem.Text = "ファイル(&F)";
-            // 
-            // SearchLevelToolStripMenuItem
-            // 
-            this.SearchLevelToolStripMenuItem.Name = "SearchLevelToolStripMenuItem";
-            this.SearchLevelToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
-            this.SearchLevelToolStripMenuItem.Text = "検索レベル(&L)";
-            this.SearchLevelToolStripMenuItem.DropDownOpening += new System.EventHandler(this.SearchLevelToolStripMenuItem_DropDownOpening);
-            this.SearchLevelToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.SearchLevelToolStripMenuItem_DropDownItemClicked);
-            // 
-            // WebSiteToolStripMenuItem
-            // 
-            this.WebSiteToolStripMenuItem.Name = "WebSiteToolStripMenuItem";
-            this.WebSiteToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
-            this.WebSiteToolStripMenuItem.Text = "動画サイト(&M)";
-            this.WebSiteToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.WebSiteToolStripMenuItem_DropDownItemClicked);
-            // 
-            // AutoPlayToolStripMenuItem
-            // 
-            this.AutoPlayToolStripMenuItem.Checked = true;
-            this.AutoPlayToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoPlayToolStripMenuItem.Name = "AutoPlayToolStripMenuItem";
-            this.AutoPlayToolStripMenuItem.Size = new System.Drawing.Size(427, 44);
-            this.AutoPlayToolStripMenuItem.Text = "動画サイトを自動的に開く(&A)";
-            this.AutoPlayToolStripMenuItem.Click += new System.EventHandler(this.AutoPlayToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -179,10 +178,10 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.rightClickMenuStrip.ResumeLayout(false);
             this.menuStripMain.ResumeLayout(false);
             this.menuStripMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.rightClickMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -32,12 +32,13 @@ namespace Mpga.Gochiusearch
 
         private const string _tempBrowserImage = "Browser";
         private Navigator[] _navigators = new Navigator[]{ };
-        private string _defaultNavigator = "niconico";
+        private const string _defaultNavigator = "niconico";
+        private const string _indexPath = @"index";
         public MainForm()
         {
             InitializeComponent();
             InitializeUserComponent();
-            string path = @"index";
+            string path = _indexPath;
 
             string[] files = Directory.GetFiles(path, "*.txt");
             List<Navigator> navigators = new List<Navigator>();
@@ -56,28 +57,11 @@ namespace Mpga.Gochiusearch
                 }
             }
             _navigators = navigators.ToArray();
-            SetNavigator(_defaultNavigator);
+            SelectWebSite(_defaultNavigator);
             LoadImageInfo();
         }
 
-        private void SetNavigator(int index)
-        {
-            _navigator = _navigators[index];
-            ToolStripMenuItem checkedItem = this.WebSiteToolStripMenuItem.DropDownItems[index] as ToolStripMenuItem;
-            checkedItem.Select();
-        }
-        private void SetNavigator(string name)
-        {
-            for(int i=0; i < _navigators.Length; i++)
-            {
-                if (_navigators[i].Name == name)
-                {
-                    SetNavigator(i);
-                    return;
-                }
-            }
-            SetNavigator(0);
-        }
+
 
         private void InitializeUserComponent()
         {
@@ -128,8 +112,6 @@ namespace Mpga.Gochiusearch
                 Environment.Exit(1);
             }
         }
-
-
 
 
         private bool _isUrl = false;
@@ -412,9 +394,40 @@ namespace Mpga.Gochiusearch
 
         private void SelectLevel(int level)
         {
-            ToolStripMenuItem checkedItem = this.SearchLevelToolStripMenuItem.DropDownItems[level] as ToolStripMenuItem;
-            checkedItem.Select();
+            var items = this.SearchLevelToolStripMenuItem.DropDownItems;
+            for (int i=0; i< items.Count; i++)
+            {
+                ToolStripMenuItem item = items[i] as ToolStripMenuItem;
+                if (i == level)
+                {
+                    item.Checked = true;
+                    item.Select();
+                }
+                else
+                {
+                    item.Checked = false;
+                }
+            }
             _level = level;
+        }
+
+        private void SelectWebSite(string name)
+        {
+            var items = this.WebSiteToolStripMenuItem.DropDownItems;
+            for (int i = 0; i < items.Count; i++)
+            {
+                ToolStripMenuItem item = items[i] as ToolStripMenuItem;
+                if (_navigators[i].Name == name)
+                {
+                    item.Checked = true;
+                    item.Select();
+                    _navigator = _navigators[i];
+                }
+                else
+                {
+                    item.Checked = false;
+                }
+            }
         }
 
         private void SearchLevelToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
@@ -422,14 +435,18 @@ namespace Mpga.Gochiusearch
             SelectLevel(_level);
         }
 
+        private void WebSiteToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            SelectWebSite(e.ClickedItem.Text);
+        }
+
+        private void WebSiteToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            SelectWebSite(_navigator.Name);
+        }
         private void AutoPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.AutoPlayToolStripMenuItem.Checked = !this.AutoPlayToolStripMenuItem.Checked;
-        }
-
-        private void WebSiteToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            SetNavigator(e.ClickedItem.Text);
         }
     }
 }
