@@ -262,6 +262,10 @@ namespace Mpga.Gochiusearch
 
         private void FindImage(string file)
         {
+            if(file == "")
+            {
+                return;
+            }
             if (_lastUri != _currentUri)
             {
                 // ドラッグされた画像を表示
@@ -402,6 +406,7 @@ namespace Mpga.Gochiusearch
                 {
                     item.Checked = true;
                     item.Select();
+                    FindImage(_currentFile);
                 }
                 else
                 {
@@ -422,6 +427,7 @@ namespace Mpga.Gochiusearch
                     item.Checked = true;
                     item.Select();
                     _navigator = _navigators[i];
+                    FindImage(_currentFile);
                 }
                 else
                 {
