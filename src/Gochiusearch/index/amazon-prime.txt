@@ -1,0 +1,26 @@
+﻿Amazon prime,-6,&t=<sss>
+0,1,29.99,ご注文はうさぎですか？第1羽「ひと目で尋常でないもふもふだと見抜いたよ」,https://www.amazon.co.jp/gp/video/detail/B014GML11O/ref=stream_prime_hd_ep?autoplay=1
+0,2,29.99,ご注文はうさぎですか？第2羽「小麦を愛した少女と小豆に愛された少女」,https://www.amazon.co.jp/gp/video/detail/B014GMNSTM/ref=stream_prime_hd_ep?autoplay=1
+0,3,29.99,ご注文はうさぎですか？第3羽「初めて酔った日の事憶えてる？自分の家でキャンプファイヤーしようとしたわよね」,https://www.amazon.co.jp/gp/video/detail/B014GML80I/ref=stream_prime_hd_ep?autoplay=1
+0,4,29.99,ご注文はうさぎですか？第4羽「ラッキーアイテムは野菜と罪と罰」,https://www.amazon.co.jp/gp/video/detail/B014GMLDNU/ref=stream_prime_hd_ep?autoplay=1
+0,5,29.99,ご注文はうさぎですか？第5羽「ココアと悪意なき殺意」,https://www.amazon.co.jp/gp/video/detail/B014GMLKTM/ref=stream_prime_hd_ep?autoplay=1
+0,6,29.99,ご注文はうさぎですか？第6羽「お話をするお話」,https://www.amazon.co.jp/gp/video/detail/B014GMKOP8/ref=stream_prime_hd_ep?autoplay=1
+0,7,29.99,ご注文はうさぎですか？第7羽「Call Me Sister.」,https://www.amazon.co.jp/gp/video/detail/B014GMMP9Q/ref=stream_prime_hd_ep?autoplay=1
+0,8,29.99,ご注文はうさぎですか？第8羽「プールに濡れて雨に濡れて涙に濡れて」,https://www.amazon.co.jp/gp/video/detail/B014GMKA84/ref=stream_prime_hd_ep?autoplay=1
+0,9,29.99,ご注文はうさぎですか？第9羽「青山スランプマウンテン」,https://www.amazon.co.jp/gp/video/detail/B014GMMLFE/ref=stream_prime_hd_ep?autoplay=1
+0,10,29.99,ご注文はうさぎですか？第10羽「対お姉ちゃん用決戦部隊、通称チマメ隊」,https://www.amazon.co.jp/gp/video/detail/B014GMNK40/ref=stream_prime_hd_ep?autoplay=1
+0,11,29.99,ご注文はうさぎですか？第11羽「少女は赤い外套を纏いウサギを駆りて聖夜の空を行く」,https://www.amazon.co.jp/gp/video/detail/B014GMJZ5S/ref=stream_prime_hd_ep?autoplay=1
+0,12,29.99,ご注文はうさぎですか？第12羽「君のためなら寝坊する」,https://www.amazon.co.jp/gp/video/detail/B014GMN18K/ref=stream_prime_hd_ep?autoplay=1
+1,1,29.99,ご注文はうさぎですか？？第1羽「笑顔とフラッシュがやかましい これが私の自称姉です」,https://www.amazon.co.jp/gp/video/detail/B016PVQZ4M/ref=stream_prime_hd_ep?autoplay=1
+1,2,29.99,ご注文はうさぎですか？？第2羽「灰色兎と灰かぶり姫」,https://www.amazon.co.jp/gp/video/detail/B0170JD352/ref=stream_prime_hd_ep?autoplay=1
+1,3,29.99,ご注文はうさぎですか？？第3羽「回転舞踏伝説アヒル隊」,https://www.amazon.co.jp/gp/video/detail/B01724Q1XG/ref=stream_prime_hd_ep?autoplay=1
+1,4,29.99,ご注文はうさぎですか？？第4羽「ココア先輩の優雅なお茶会チュートリアル」,https://www.amazon.co.jp/gp/video/detail/B01724Q0LO/ref=stream_prime_hd_ep?autoplay=1
+1,5,29.99,ご注文はうさぎですか？？第5羽「ひと口で普通のもちもちだと見抜いたよ」,https://www.amazon.co.jp/gp/video/detail/B01724QDN4/ref=stream_prime_hd_ep?autoplay=1
+1,6,29.99,ご注文はうさぎですか？？第6羽「木組みの街攻略完了(みっしょんこんぷりーと)」,https://www.amazon.co.jp/gp/video/detail/B01724Q33E/ref=stream_prime_hd_ep?autoplay=1
+1,7,29.99,ご注文はうさぎですか？？第7羽「甘えん坊なあの子はシャボン玉のように儚く消える」,https://www.amazon.co.jp/gp/video/detail/B01724Q64K/ref=stream_prime_hd_ep?autoplay=1
+1,8,29.99,ご注文はうさぎですか？？第8羽「スニーキングストーキングストーカーストーリー」,https://www.amazon.co.jp/gp/video/detail/B01724QH6W/ref=stream_prime_hd_ep?autoplay=1
+1,9,29.99,ご注文はうさぎですか？？第9羽「毛玉は特攻し無慈悲なボタンは放たれる」,https://www.amazon.co.jp/gp/video/detail/B01724QI84/ref=stream_prime_hd_ep?autoplay=1
+1,10,29.99,ご注文はうさぎですか？？第10羽「Eを探す日常」,https://www.amazon.co.jp/gp/video/detail/B01724QH0S/ref=stream_prime_hd_ep?autoplay=1
+1,11,29.99,ご注文はうさぎですか？？第11羽「スターダスト・マイムマイム」,https://www.amazon.co.jp/gp/video/detail/B01724PZ1U/ref=stream_prime_hd_ep?autoplay=1
+1,12,29.99,ご注文はうさぎですか？？第12羽「宝物は君の決定的瞬間」,https://www.amazon.co.jp/gp/video/detail/B01724QEKQ/ref=stream_prime_hd_ep?autoplay=1
+2,1,29.99,ご注文はうさぎですか？？ ～Dear My Sister～,https://www.amazon.co.jp/gp/video/detail/B07FN8V5H6/ref=atv_dp_pb_core?autoplay=1

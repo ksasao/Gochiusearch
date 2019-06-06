@@ -32,15 +32,12 @@ namespace Mpga.Gochiusearch
         private const string _tempBrowserImage = "Browser";
         private Navigator[] _navigators = new Navigator[]{ };
 
-        private string _website = Properties.Settings.Default.Website;
-        private int _level = Properties.Settings.Default.SearchLevel;
-
         private const string _indexPath = @"index";
         public MainForm()
         {
             InitializeComponent();
             InitializeUserComponent();
-            string path = _indexPath;
+            string path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory,_indexPath);
 
             string[] files = Directory.GetFiles(path, "*.txt");
             List<Navigator> navigators = new List<Navigator>();
@@ -59,7 +56,7 @@ namespace Mpga.Gochiusearch
                 }
             }
             _navigators = navigators.ToArray();
-            SelectWebsite(_website);
+        　　SelectWebsite(Properties.Settings.Default.Website);
             LoadImageInfo();
 
             this.AutoPlayToolStripMenuItem.Checked = Properties.Settings.Default.AutoPlay; 
@@ -87,7 +84,7 @@ namespace Mpga.Gochiusearch
             {
                 this.SearchLevelToolStripMenuItem.DropDownItems.Add(i.ToString());
             }
-            SelectSearchLevel(_level);
+            SelectSearchLevel(Properties.Settings.Default.SearchLevel);
 
 
             // OSを判別しフォントを変更
@@ -304,7 +301,8 @@ namespace Mpga.Gochiusearch
             this.richTextBox1.Text = string.Format("検索画像: {0}{1}", target, Environment.NewLine);
 
             List<string> data = new List<string>();
-            ImageInfo[][] log = _iv.GetSimilarImage(vec, _level);
+            int level = Properties.Settings.Default.SearchLevel;
+            ImageInfo[][] log = _iv.GetSimilarImage(vec, level);
             watch.Stop();
             this.richTextBox1.Text += string.Format("検索時間: {0} ms{1}{1}", watch.ElapsedMilliseconds, Environment.NewLine);
 
@@ -408,18 +406,20 @@ namespace Mpga.Gochiusearch
                 ToolStripMenuItem item = items[i] as ToolStripMenuItem;
                 if (i == level)
                 {
-                    Properties.Settings.Default.SearchLevel = level;
-                    Properties.Settings.Default.Save();
                     item.Checked = true;
                     item.Select();
-                    FindImage(_currentFile);
+                    if (Properties.Settings.Default.SearchLevel != level)
+                    {
+                        Properties.Settings.Default.SearchLevel = level;
+                        Properties.Settings.Default.Save();
+                        FindImage(_currentFile);
+                    }
                 }
                 else
                 {
                     item.Checked = false;
                 }
             }
-            _level = level;
         }
 
         private void SelectWebsite(string website)
@@ -433,9 +433,12 @@ namespace Mpga.Gochiusearch
                     item.Checked = true;
                     item.Select();
                     _navigator = _navigators[i];
-                    FindImage(_currentFile);
-                    Properties.Settings.Default.Website = website;
-                    Properties.Settings.Default.Save();
+                    if(Properties.Settings.Default.Website != website)
+                    {
+                        Properties.Settings.Default.Website = website;
+                        Properties.Settings.Default.Save();
+                        FindImage(_currentFile);
+                    }
                 }
                 else
                 {
@@ -446,7 +449,8 @@ namespace Mpga.Gochiusearch
 
         private void SearchLevelToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            SelectSearchLevel(_level);
+            int level = Properties.Settings.Default.SearchLevel;
+            SelectSearchLevel(level);
         }
 
         private void WebSiteToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
