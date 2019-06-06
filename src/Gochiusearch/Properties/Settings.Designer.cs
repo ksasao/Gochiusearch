@@ -22,5 +22,41 @@ namespace Mpga.Gochiusearch.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("niconico")]
+        public string Website {
+            get {
+                return ((string)(this["Website"]));
+            }
+            set {
+                this["Website"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int SearchLevel {
+            get {
+                return ((int)(this["SearchLevel"]));
+            }
+            set {
+                this["SearchLevel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoPlay {
+            get {
+                return ((bool)(this["AutoPlay"]));
+            }
+            set {
+                this["AutoPlay"] = value;
+            }
+        }
     }
 }

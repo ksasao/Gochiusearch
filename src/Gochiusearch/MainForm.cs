@@ -25,14 +25,16 @@ namespace Mpga.Gochiusearch
         private string _lastUri = "";
         private int _cacheImageCount = 0;
         private Navigator _navigator = null;
-        private int _level = 3;
 
         private ImageSearchEngine.ImageSearch _iv = null;
         private Bitmap _bmpCache = null;
 
         private const string _tempBrowserImage = "Browser";
         private Navigator[] _navigators = new Navigator[]{ };
-        private const string _defaultNavigator = "niconico";
+
+        private string _website = Properties.Settings.Default.Website;
+        private int _level = Properties.Settings.Default.SearchLevel;
+
         private const string _indexPath = @"index";
         public MainForm()
         {
@@ -57,8 +59,10 @@ namespace Mpga.Gochiusearch
                 }
             }
             _navigators = navigators.ToArray();
-            SelectWebSite(_defaultNavigator);
+            SelectWebsite(_website);
             LoadImageInfo();
+
+            this.AutoPlayToolStripMenuItem.Checked = Properties.Settings.Default.AutoPlay; 
         }
 
 
@@ -83,7 +87,7 @@ namespace Mpga.Gochiusearch
             {
                 this.SearchLevelToolStripMenuItem.DropDownItems.Add(i.ToString());
             }
-            SelectLevel(_level);
+            SelectSearchLevel(_level);
 
 
             // OSを判別しフォントを変更
@@ -393,10 +397,10 @@ namespace Mpga.Gochiusearch
         private void SearchLevelToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             int level = Convert.ToInt32(e.ClickedItem.Text);
-            SelectLevel(level);
+            SelectSearchLevel(level);
         }
 
-        private void SelectLevel(int level)
+        private void SelectSearchLevel(int level)
         {
             var items = this.SearchLevelToolStripMenuItem.DropDownItems;
             for (int i=0; i< items.Count; i++)
@@ -404,6 +408,8 @@ namespace Mpga.Gochiusearch
                 ToolStripMenuItem item = items[i] as ToolStripMenuItem;
                 if (i == level)
                 {
+                    Properties.Settings.Default.SearchLevel = level;
+                    Properties.Settings.Default.Save();
                     item.Checked = true;
                     item.Select();
                     FindImage(_currentFile);
@@ -416,18 +422,20 @@ namespace Mpga.Gochiusearch
             _level = level;
         }
 
-        private void SelectWebSite(string name)
+        private void SelectWebsite(string website)
         {
             var items = this.WebSiteToolStripMenuItem.DropDownItems;
             for (int i = 0; i < items.Count; i++)
             {
                 ToolStripMenuItem item = items[i] as ToolStripMenuItem;
-                if (_navigators[i].Name == name)
+                if (_navigators[i].Name == website)
                 {
                     item.Checked = true;
                     item.Select();
                     _navigator = _navigators[i];
                     FindImage(_currentFile);
+                    Properties.Settings.Default.Website = website;
+                    Properties.Settings.Default.Save();
                 }
                 else
                 {
@@ -438,21 +446,25 @@ namespace Mpga.Gochiusearch
 
         private void SearchLevelToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            SelectLevel(_level);
+            SelectSearchLevel(_level);
         }
 
         private void WebSiteToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            SelectWebSite(e.ClickedItem.Text);
+            SelectWebsite(e.ClickedItem.Text);
         }
 
         private void WebSiteToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            SelectWebSite(_navigator.Name);
+            SelectWebsite(_navigator.Name);
         }
         private void AutoPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.AutoPlayToolStripMenuItem.Checked = !this.AutoPlayToolStripMenuItem.Checked;
+            bool status = !this.AutoPlayToolStripMenuItem.Checked;
+            this.AutoPlayToolStripMenuItem.Checked = status;
+            Properties.Settings.Default.AutoPlay = status;
+            Properties.Settings.Default.Save();
+
         }
     }
 }
