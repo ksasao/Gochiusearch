@@ -6,7 +6,7 @@
 
 画像を特定するための情報のみが含まれているため軽量で高速に動作します。
 
-![実行イメージ](https://raw.githubusercontent.com/wiki/ksasao/Gochiusearch/image1.png)
+![実行イメージ](https://user-images.githubusercontent.com/179872/59112698-7e569980-897e-11e9-9d8d-bfd26211b723.png)
 
 ## ダウンロード
 配布中のアプリは Windows/Mac 向けですが、Linuxでも以下の手順で動作させることができます。
