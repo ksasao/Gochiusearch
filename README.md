@@ -1,8 +1,8 @@
 # ごちうさ全動画シーン検索エンジン Gochiusearch
-ご注文はうさぎですか？1期・2期の全画像約100万枚を対象とした検索エンジン ごちうサーチ です。Windows/Mac/Linux で動作します。
-アプリケーションにキャプ画像をブラウザやフォルダからDrag&Dropすると、
+ご注文はうさぎですか？1期・2期・Dear My Sister の全画像100万枚以上を対象とした検索エンジン ごちうサーチ です。Windows/Mac/Linux で動作します。
+アプリケーションにキャプチャ画像をブラウザやフォルダからDrag&Dropすると、
 何羽のどのあたりかを返します。
-また、自動的にニコニコ動画の該当部分に移動することもできます。
+また、自動的にニコニコ動画/dアニメストア/Amazon prime の該当部分に移動することもできます。
 
 画像を特定するための情報のみが含まれているため軽量で高速に動作します。
 
@@ -12,7 +12,8 @@
 配布中のアプリは Windows/Mac 向けですが、Linuxでも以下の手順で動作させることができます。
 
 ### Windows 版
-- [ごちうサーチ／Microsoft Store](https://www.microsoft.com/ja-jp/p/%E3%81%94%E3%81%A1%E3%81%86%E3%82%B5%E3%83%BC%E3%83%81/9njb7xgz6tk5?activetab=pivot%3Aoverviewtab) (2019/5/9)
+- [ごちうサーチ／Microsoft Store](https://www.microsoft.com/ja-jp/p/%E3%81%94%E3%81%A1%E3%81%86%E3%82%B5%E3%83%BC%E3%83%81/9njb7xgz6tk5?activetab=pivot%3Aoverviewtab) (2019/6/7)
+- [Gochiusearch-1.2.7907.1331.zip](https://github.com/ksasao/Gochiusearch/files/3266334/Gochiusearch-1.2.7907.1331.zip) (2019/6/7)
 - [Gochiusearch-1.1.5902.28922_1_2_dms.zip](https://github.com/ksasao/Gochiusearch/files/2540296/Gochiusearch-1.1.5902.28922_1_2_dms.zip) (2018/11/02)
 
 ### Mac 版
