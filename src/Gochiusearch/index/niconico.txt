@@ -24,3 +24,4 @@
 1,11,29.99,ご注文はうさぎですか？？第11羽「スターダスト・マイムマイム」,http://www.nicovideo.jp/watch/1450673966
 1,12,29.99,ご注文はうさぎですか？？第12羽「宝物は君の決定的瞬間」,http://www.nicovideo.jp/watch/1451283816
 2,1,29.99,ご注文はうさぎですか？？ ～Dear My Sister～,http://www.nicovideo.jp/watch/1531879747
+3,1,29.99,ご注文はうさぎですか？？ ～Sing For You～,https://www.nicovideo.jp/watch/1576636563

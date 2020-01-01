@@ -24,3 +24,4 @@
 1,11,29.99,ご注文はうさぎですか？？第11羽「スターダスト・マイムマイム」,https://www.amazon.co.jp/gp/video/detail/B01724PZ1U/ref=stream_prime_hd_ep?autoplay=1
 1,12,29.99,ご注文はうさぎですか？？第12羽「宝物は君の決定的瞬間」,https://www.amazon.co.jp/gp/video/detail/B01724QEKQ/ref=stream_prime_hd_ep?autoplay=1
 2,1,29.99,ご注文はうさぎですか？？ ～Dear My Sister～,https://www.amazon.co.jp/gp/video/detail/B07FN8V5H6/ref=atv_dp_pb_core?autoplay=1
+3,1,29.99,ご注文はうさぎですか？？ ～Sing For You～,https://www.amazon.co.jp/gp/video/detail/B0834N9MVX/ref=stream_vod_sd_mv?autoplay=1
