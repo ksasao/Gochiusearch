@@ -70,13 +70,28 @@ namespace Mpga.ImageSearchEngine
         /// <returns>ハッシュ値</returns>
         public ulong GetVector(string filename)
         {
-            // dHash (difference hash) を計算
-            // http://www.hackerfactor.com/blog/?/archives/529-Kind-of-Like-That.html
-
             // 入力した画像を 9x8 の領域にスケールする
             Bitmap bmp = new Bitmap(filename);
             byte[] data = GetSmallImageData(bmp, 9, 8);
             bmp.Dispose();
+
+            return GetHash(data);
+        }
+        /// <summary>
+        /// 画像から類似画像が近い値を持つようなハッシュ値を計算します
+        /// </summary>
+        /// <param name="bmp">ビットマップ</param>
+        /// <returns>ハッシュ値</returns>
+        public ulong GetVector(Bitmap bmp)
+        {
+            byte[] data = GetSmallImageData(bmp, 9, 8);
+            return GetHash(data);
+        }
+
+        private static ulong GetHash(byte[] data)
+        {
+            // dHash (difference hash) を計算
+            // http://www.hackerfactor.com/blog/?/archives/529-Kind-of-Like-That.html
 
             // モノクロ化
             int[] mono = new int[data.Length / 4];
@@ -99,6 +114,7 @@ namespace Mpga.ImageSearchEngine
             }
             return result;
         }
+
 
         private byte[] GetSmallImageData(Bitmap bmp, int width, int height)
         {
