@@ -13,9 +13,9 @@ namespace GochiusearchCmd
     {
         static void Main(string[] args)
         {
-            string path = @"ご注文はうさぎですか？ BLOOM 第1羽「にっこりカフェの魔法使い」.mp4";
-            ushort titleId = 0;
-            ushort episodeId = 1;
+            string path = "";
+            ushort titleId = ushort.MaxValue;
+            ushort episodeId = ushort.MaxValue;
             string inputDb = "index.db";
             string outputDb = "index.db";
 
