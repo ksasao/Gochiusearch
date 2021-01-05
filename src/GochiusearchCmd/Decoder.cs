@@ -13,6 +13,34 @@ using OpenCvSharp.Extensions;
 
 namespace GochiusearchCmd
 {
+    /// <summary>
+    /// 動画ファイルの処理中の状況を報告する
+    /// </summary>
+    public class ProgressEventArgs : EventArgs
+    {
+        /// <summary>
+        /// 処理が終わったフレーム数
+        /// </summary>
+        public uint Current { get; set; }
+        /// <summary>
+        /// 処理対象全体のフレーム数
+        /// </summary>
+        public uint Total { get; set; }
+        /// <summary>
+        /// 処理の完了状況(%)
+        /// </summary>
+        public float ProgressPercentage { get { return 100f * Current / Total; } }
+        /// <summary>
+        /// 処理中の状況
+        /// </summary>
+        /// <param name="current">現在処理が終了したフレーム番号</param>
+        /// <param name="total">全体のフレーム数</param>
+        public ProgressEventArgs(uint current, uint total)
+        {
+            Current = current;
+            Total = total;
+        }
+    }
     public class Decoder : IDisposable
     {
         private bool disposedValue;
@@ -24,6 +52,8 @@ namespace GochiusearchCmd
         private UInt32 frame = 0;
 
         public string Path {get; private set;}
+        public event EventHandler<ProgressEventArgs> ProgressChanged;
+        public event EventHandler<ProgressEventArgs> Completed;
         public Decoder(string path, UInt16 titleId, UInt16 episodeId)
         {
             Path = path;
@@ -107,6 +137,7 @@ namespace GochiusearchCmd
                 {
                     AddInfo(vecs[j]);
                 }
+                OnProgressChanged(new ProgressEventArgs(frame, (uint)len));
             }
 
             // Release resources
@@ -115,9 +146,34 @@ namespace GochiusearchCmd
                 mats[i].Dispose();
                 bitmaps[i].Dispose();
             }
+            OnProgressChanged(new ProgressEventArgs(frame, (uint)len));
+            OnCompleted(new ProgressEventArgs(frame, (uint)len));
             return info.ToArray();
         }
+        protected virtual void OnProgressChanged(ProgressEventArgs args)
+        {
+            // Make a temporary copy of the event to avoid possibility of
+            // a race condition if the last subscriber unsubscribes
+            // immediately after the null check and before the event is raised.
+            EventHandler<ProgressEventArgs> raiseEvent = ProgressChanged;
 
+            if (raiseEvent != null)
+            {
+                raiseEvent(this, args);
+            }
+        }
+        protected virtual void OnCompleted(ProgressEventArgs args)
+        {
+            // Make a temporary copy of the event to avoid possibility of
+            // a race condition if the last subscriber unsubscribes
+            // immediately after the null check and before the event is raised.
+            EventHandler<ProgressEventArgs> raiseEvent = Completed;
+
+            if (raiseEvent != null)
+            {
+                raiseEvent(this, args);
+            }
+        }
         private void AddInfo(ulong hash)
         {
             info.Add(new ImageInfo
