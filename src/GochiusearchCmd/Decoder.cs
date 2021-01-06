@@ -103,6 +103,11 @@ namespace GochiusearchCmd
             int width = capture.FrameWidth;
             int height = capture.FrameHeight;
             
+            if(len == 0)
+            {
+                throw new FormatException("動画ファイルの読み込みに失敗しました");
+            }
+
             // Init for multi threading
             for(int i=0; i<threads; i++)
             {

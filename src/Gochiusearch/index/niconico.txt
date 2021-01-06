@@ -25,3 +25,15 @@
 1,12,29.99,ご注文はうさぎですか？？第12羽「宝物は君の決定的瞬間」,http://www.nicovideo.jp/watch/1451283816
 2,1,29.99,ご注文はうさぎですか？？ ～Dear My Sister～,http://www.nicovideo.jp/watch/1531879747
 3,1,29.99,ご注文はうさぎですか？？ ～Sing For You～,https://www.nicovideo.jp/watch/1576636563
+4,1,29.99,ご注文はうさぎですか？ BLOOM 第1羽「にっこりカフェの魔法使い」,https://www.nicovideo.jp/watch/so37672710
+4,2,29.99,ご注文はうさぎですか？ BLOOM 第2羽「幼馴染ハート強奪事件」,https://www.nicovideo.jp/watch/so37704931
+4,3,29.99,ご注文はうさぎですか？ BLOOM 第3羽「世界のすべては私の経験値」,https://www.nicovideo.jp/watch/so37736055
+4,4,29.99,ご注文はうさぎですか？ BLOOM 第4羽「あったかもしれない日常」,https://www.nicovideo.jp/watch/so37771424
+4,5,29.99,ご注文はうさぎですか？ BLOOM 第5羽「彼女は熱き旋風　彼女は気ままなそよ風」,https://www.nicovideo.jp/watch/so37807147
+4,6,29.99,ご注文はうさぎですか？ BLOOM 第6羽「うさぎの団体さんも大歓迎です」,https://www.nicovideo.jp/watch/so37833286
+4,7,29.99,ご注文はうさぎですか？ BLOOM 第7羽「今夜は幽霊とだって踊り明かせる Halloween Night！」,https://www.nicovideo.jp/watch/so37871608
+4,8,29.99,ご注文はうさぎですか？ BLOOM 第8羽「スタンプ　スリープ　スタディ　スマイル」,https://www.nicovideo.jp/watch/so37905277
+4,9,29.99,ご注文はうさぎですか？ BLOOM 第9羽「やきもち風味のカモミール」,https://www.nicovideo.jp/watch/so37940482
+4,10,29.99,ご注文はうさぎですか？ BLOOM 第10羽「ハートがいっぱいの救援要請」,https://www.nicovideo.jp/watch/so37966625
+4,11,29.99,ご注文はうさぎですか？ BLOOM 第11羽「にっこりカフェと七色の魔法使い」,https://www.nicovideo.jp/watch/so38008767
+4,12,29.99,ご注文はうさぎですか？ BLOOM 第12羽「その一歩は君を見ているから踏み出せる」,https://www.nicovideo.jp/watch/so38014605

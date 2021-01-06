@@ -470,5 +470,6 @@ namespace Mpga.Gochiusearch
             Properties.Settings.Default.Save();
 
         }
+
     }
 }

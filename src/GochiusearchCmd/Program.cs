@@ -41,6 +41,16 @@ namespace GochiusearchCmd
                 }
             });
 
+            if (results.Errors.Count() > 0)
+            {
+                return;
+            }
+
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"{path} が見つかりませんでした。");
+                return;
+            }
 
             ImageInfo[] currentDb = new ImageInfo[] { };
             if (File.Exists(inputDb))
