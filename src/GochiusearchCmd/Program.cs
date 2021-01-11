@@ -57,6 +57,7 @@ namespace GochiusearchCmd
             {
                 ImageSearch imageSearch = new ImageSearch();
                 currentDb = imageSearch.LoadFromDb(inputDb);
+                Console.WriteLine($"{inputDb} には {currentDb.Length} 件のデータがあります。");
             }
             var count = currentDb.Where(c => c.TitleId == titleId && c.EpisodeId == episodeId).Count();
 
