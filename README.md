@@ -13,7 +13,7 @@
 
 ### Windows 版
 - [ごちうサーチ／Microsoft Store](https://www.microsoft.com/ja-jp/p/%E3%81%94%E3%81%A1%E3%81%86%E3%82%B5%E3%83%BC%E3%83%81/9njb7xgz6tk5?activetab=pivot%3Aoverviewtab) (2021/1/11)
-- [Gochiusearch_v1.2.7676.36376.zip](https://github.com/ksasao/Gochiusearch/releases/download/v1.2.7676.36376/Gochiusearch_v1.2.7676.36376.zip)
+- [Gochiusearch_v1.2.7676.36376.zip](https://github.com/ksasao/Gochiusearch/releases/download/v1.2.7676.36376/Gochiusearch_v1.2.7676.36376.zip) (2021/1/11)
 
 ### 過去のバージョン
 - [Gochiusearch-1.2.7907.1331.zip](https://github.com/ksasao/Gochiusearch/files/3266334/Gochiusearch-1.2.7907.1331.zip) (2019/6/7)
