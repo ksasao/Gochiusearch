@@ -312,30 +312,37 @@ namespace Mpga.Gochiusearch
                 return;
             }
 
-            for (int i = 0; i < log.Length; i++)
+            try
             {
-                var scene = log[i];
-                int titleId = scene[0].TitleId;
-                int episodeId = scene[0].EpisodeId;
-
-                var storyInfo = _navigator.Stories.First(c => c.TitleId == titleId && c.EpisodeId == episodeId);
-
-                string title = _navigator.GetTitleWithSubtitle(storyInfo, scene[0].Frame);
-                string time = _navigator.GetTimeString(storyInfo, scene[0].Frame, 0, "<m>:<ss>");
-                data.Add($"{title} {time} 付近");
-
-                string url = _navigator.GetSeekUrl(storyInfo, scene[0].Frame);
-                data.Add(url);
-                if (i == 0)
+                for (int i = 0; i < log.Length; i++)
                 {
-                    if (this.AutoPlayToolStripMenuItem.Checked)
+                    var scene = log[i];
+                    int titleId = scene[0].TitleId;
+                    int episodeId = scene[0].EpisodeId;
+
+                    var storyInfo = _navigator.Stories.First(c => c.TitleId == titleId && c.EpisodeId == episodeId);
+
+                    string title = _navigator.GetTitleWithSubtitle(storyInfo, scene[0].Frame);
+                    string time = _navigator.GetTimeString(storyInfo, scene[0].Frame, 0, "<m>:<ss>");
+                    data.Add($"{title} {time} 付近");
+
+                    string url = _navigator.GetSeekUrl(storyInfo, scene[0].Frame);
+                    data.Add(url);
+                    if (i == 0)
                     {
-                        OpenUrl(url);
+                        if (this.AutoPlayToolStripMenuItem.Checked)
+                        {
+                            OpenUrl(url);
+                        }
                     }
                 }
+                this.richTextBox1.Text += string.Join(Environment.NewLine, data.ToArray());
             }
-
-            this.richTextBox1.Text += string.Join(Environment.NewLine, data.ToArray());
+            catch (System.InvalidOperationException)
+            {
+                string message = "この画像は他の動画サイトでは検索可能です。[ファイル] > [動画サイト] で切り替えてみてください。";
+                this.richTextBox1.Text += message;
+            }
         }
 
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
