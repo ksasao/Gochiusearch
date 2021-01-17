@@ -432,6 +432,10 @@ namespace Mpga.Gochiusearch
         private void SelectWebsite(string website)
         {
             var items = this.WebSiteToolStripMenuItem.DropDownItems;
+            if(items.Count > 0 && website == null)
+            {
+                website = _navigators[0].Name;
+            }
             for (int i = 0; i < items.Count; i++)
             {
                 ToolStripMenuItem item = items[i] as ToolStripMenuItem;
@@ -467,7 +471,7 @@ namespace Mpga.Gochiusearch
 
         private void WebSiteToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            SelectWebsite(_navigator.Name);
+            SelectWebsite(_navigator?.Name);
         }
         private void AutoPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
