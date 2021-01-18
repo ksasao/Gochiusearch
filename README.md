@@ -6,16 +6,17 @@
 
 画像を特定するための情報のみが含まれているため軽量で高速に動作します。
 
-![実行イメージ](https://user-images.githubusercontent.com/179872/104189045-7d8cc000-545d-11eb-8f9a-dd66c168759e.jpg)
+![実行イメージ](https://user-images.githubusercontent.com/179872/104926971-2dc17200-59e4-11eb-985b-008ebcf85030.png)
 
 ## ダウンロード
 配布中のアプリは Windows/Mac 向けですが、Linuxでも以下の手順で動作させることができます。
 
 ### Windows 版
-- [ごちうサーチ／Microsoft Store](https://www.microsoft.com/ja-jp/p/%E3%81%94%E3%81%A1%E3%81%86%E3%82%B5%E3%83%BC%E3%83%81/9njb7xgz6tk5?activetab=pivot%3Aoverviewtab) (2021/1/11)
-- [Gochiusearch_v1.2.7676.36376.zip](https://github.com/ksasao/Gochiusearch/releases/download/v1.2.7676.36376/Gochiusearch_v1.2.7676.36376.zip) (2021/1/11)
+- [ごちうサーチ／Microsoft Store](https://www.microsoft.com/ja-jp/p/%E3%81%94%E3%81%A1%E3%81%86%E3%82%B5%E3%83%BC%E3%83%81/9njb7xgz6tk5?activetab=pivot%3Aoverviewtab) (2021/1/18)
+- [Gochiusearch_v1.2.7688.820.zip](https://github.com/ksasao/Gochiusearch/releases/download/v1.2.7688.820/Gochiusearch_v1.2.7688.820.zip) (2021/1/18)
 
 ### 過去のバージョン
+- [Gochiusearch_v1.2.7676.36376.zip](https://github.com/ksasao/Gochiusearch/releases/download/v1.2.7676.36376/Gochiusearch_v1.2.7676.36376.zip) (2021/1/11)
 - [Gochiusearch-1.2.7907.1331.zip](https://github.com/ksasao/Gochiusearch/files/3266334/Gochiusearch-1.2.7907.1331.zip) (2019/6/7)
 - [Gochiusearch-1.1.5902.28922_1_2_dms.zip](https://github.com/ksasao/Gochiusearch/files/2540296/Gochiusearch-1.1.5902.28922_1_2_dms.zip) (2018/11/02)
 
